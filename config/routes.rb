@@ -8,8 +8,13 @@ Rails.application.routes.draw do
   namespace :public do
   end
 
-  # 管理者側ルーティング
-  namespace :admin do
+  # deviseの顧客側ルーティング設定
+  scope module: "public" do
+    devise_for :customers, controllers: {
+    sessions: 'public/customers/sessions',  #
+    paswords: 'public/customers/paswords',
+    registrations: 'public/customers/registrations',
+  }
   end
 
 end
