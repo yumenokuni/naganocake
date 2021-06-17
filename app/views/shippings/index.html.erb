@@ -1,0 +1,32 @@
+<div class="row">
+　<div class="col-xs-12">
+
+　    <h1>配送先登録/一覧</h1>
+　　　　<%= form_with model: @shippings, url:'/shippings', local:true do |f| %>
+　　　　　<h4>郵便番号(ハイフンなし)</h4>
+            <%= f.text_field :postal_code %>
+　　　　　<h4>住所</h4>
+            <%= f.text_field :address%>
+　　　　　<h4>宛名</h4>
+            <%= f.text_field :name  %>
+　　　　　<%= f.submit '新規登録' %>
+　　　　<% end %>
+
+　　　  <table class="table table-bordered">
+　　　      <tr>
+                <th>郵便番号</th>
+                <td>住所</td>
+                <td>宛名</td>
+                <td></td>
+            </tr>
+            <%# shippings.each do |shipping| %>
+              <tr>
+                <th><%#= shippings.postal_code %></th>
+                <td><%#= shippings.address%></td>
+                <td><%#= shippings.name%></td>
+                <td></td>
+              </tr>
+            <%# end %>
+        </table>
+　</div>
+</div>
