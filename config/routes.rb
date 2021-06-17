@@ -1,13 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_for :customers
   root to: "public/homes#top"
   get "/about" => "public/homes#about", as: 'about'
-
-
-  # 顧客側ルーティング
-  namespace :public do
-  end
 
  # 管理者側ルーティング ヤマタツ追記
    devise_for :admin, controllers: {
@@ -25,6 +19,17 @@ Rails.application.routes.draw do
     get '/admins' => 'admins#top'                                             #管理者のトップ画面
     get 'search' => 'products#search'
   end
-  # 管理者側ルーティング
   
+  # 顧客側ルーティング あやかさん追記
+  scope module: "public" do
+    devise_for :customers, controllers: {
+    sessions: 'public/customers/sessions',  #
+    paswords: 'public/customers/paswords',
+    registrations: 'public/customers/registrations',
+  }
+  end
+
+  resources :shippings ,only: [:index,:create,:edit,:update,:destroy]
+  post 'shippings' => 'shippings#create'
+
 end
