@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   }
   end
 
+  resources :shippings ,only: [:index,:create,:edit,:update,:destroy]
+  post 'shippings' => 'shippings#create'
 end
