@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2021_06_17_074544) do
 
   create_table "shippings", force: :cascade do |t|
@@ -54,4 +55,16 @@ ActiveRecord::Schema.define(version: 2021_06_17_074544) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
+  
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "image_id"
+    t.text "introduction"
+    t.text "price"
+    t.boolean "is_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "genre_id"
+  end
 end
+

@@ -11,13 +11,14 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :products, only: [:index, :show, :new, :create, :edit, :update] #商品情報
+    resources :products #商品情報
     resources :customers, only: [:index, :show, :edit, :update]               #ユーザー情報
     resources :genres, only: [:index, :create, :edit, :update]                #ジャンル
     resources :orders, only: [:index, :show, :update]                         #注文
     resources :order_products, only: [:update]                                #制作ステータスを更新
     get '/admins' => 'admins#top'                                             #管理者のトップ画面
     get 'search' => 'products#search'
+
   end
   
   # 顧客側ルーティング あやかさん追記
@@ -30,6 +31,6 @@ Rails.application.routes.draw do
   end
 
   resources :shippings ,only: [:index,:create,:edit,:update,:destroy]
-  post 'shippings' => 'shippings#create'
+  resources :products, only: [:index, :show]# 顧客側商品
 
 end
