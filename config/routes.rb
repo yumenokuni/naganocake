@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     get '/admins' => 'admins#top'                                             #管理者のトップ画面
     get 'search' => 'products#search'
   end
-  
+
   # 顧客側ルーティング あやかさん追記
   scope module: "public" do
     devise_for :customers, controllers: {
@@ -28,8 +28,9 @@ Rails.application.routes.draw do
     registrations: 'public/customers/registrations',
   }
   end
-
+  
+  #顧客側ルーティング　配送先
   resources :shippings ,only: [:index,:create,:edit,:update,:destroy]
-  post 'shippings' => 'shippings#create'
-
+  #管理者側ルーティング　ジャンル
+  resources :genres,only: [:index,:create,:edit,:update]
 end
