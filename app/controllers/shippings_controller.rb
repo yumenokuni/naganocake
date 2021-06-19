@@ -2,6 +2,7 @@ class ShippingsController < ApplicationController
 
  def index
     @shipping = Shipping.new
+    @shippings = Shipping.all
  end
 
  def create
@@ -16,12 +17,15 @@ class ShippingsController < ApplicationController
 
  def destroy
     @shipping = Shipping.find(params[:id])
-    @shipping.user = current_user
+    @shipping.customer = current_customer
     @shipping.destroy
+    redirect_to shippings_path
  end
 
  def update
     @shipping = Shipping.find(params[:id])
+    @shipping.update(shipping_params)
+    redirect_to shippings_path
  end
 
   private

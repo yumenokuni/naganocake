@@ -33,7 +33,9 @@ Rails.application.routes.draw do
     get '/customers/unsubscribe' => "customers#unsubscribe"                   #ユーザー退会
     patch '/customers/withdraw' => "customers#withdraw"                       #ユーザーステータス更新
   end
-
+  
+  #管理者側ルーティング　ジャンル
+  resources :genres,only: [:index,:create,:edit,:update]
   resources :shippings, only: [:index,:create,:edit,:update,:destroy]         #配送先情報
   resources :products, only: [:index, :show]                                  #顧客側商品
 
