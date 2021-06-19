@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     paswords: 'public/customers/paswords',
     registrations: 'public/customers/registrations',
   }
-    resource :customers, except: [:create]                                    #ユーザー情報
+    resources :customers, only: [:edit, :update]                              #ユーザー情報
     get '/customers/my_page/:id' => 'customers#show', as: 'my_page'           #ユーザーマイページ
     get '/customers/unsubscribe' => "customers#unsubscribe"                   #ユーザー退会
     patch '/customers/withdraw' => "customers#withdraw"                       #ユーザーステータス更新

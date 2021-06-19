@@ -1,4 +1,80 @@
 <!--顧客側会員ページ-->
 
-<h1>showいけたね！</h1>
+<div class="container">
+  <div class="row">
+    <h4>マイページ</h4>
+  </div>
 
+  <div class="row">
+      <h5><strong>登録情報</strong></h5>
+      <%= link_to "編集する", edit_customer_path(@customer.id), class: "btn btn-success" %>
+  </div>
+
+  <div class="row">
+  <div class="col-6 offset-3">
+
+    <table class="table table-bordered">
+      <tbody>
+
+        <!--氏名-->
+        <tr>
+          <th>氏名</th>
+          <td>
+            <%= @customer.last_name %>
+            <%= @customer.first_name %>
+          </td>
+        </tr>
+
+        <!--フリガナ-->
+        <tr>
+          <th>カナ</th>
+          <td>
+            <%= @customer.last_name_kana %>
+            <%= @customer.first_name_kana %>
+          </td>
+        </tr>
+
+        <!--郵便番号-->
+        <tr>
+          <th>郵便番号</th>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+
+        <!--住所-->
+        <tr>
+          <th>住所</th>
+          <td><%= @customer.address %></td>
+        </tr>
+
+        <!--電話番号-->
+        <tr>
+          <th>電話番号</th>
+          <td><%= @customer.telephone_number %></td>
+        </tr>
+
+        <!--メールアドレス-->
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @customer.email %></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+  </div>
+
+  <!--配送先-->
+  <div class="row">
+      <h5><strong>配送先</strong></h5>
+      <%= link_to "一覧を見る", my_page_path(@customer.id), class: "btn btn-primary" %>　<!--リンク後で変更します-->
+  </div>
+
+  <!--注文履歴-->
+  <div class="row">
+      <h5><strong>注文履歴</strong></h5>
+      <%= link_to "一覧を見る", my_page_path(@customer.id), class: "btn btn-primary" %>　<!--リンク後で変更します-->
+  </div>
+
+
+</div>
