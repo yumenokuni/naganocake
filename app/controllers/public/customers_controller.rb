@@ -1,16 +1,19 @@
 class Public::CustomersController < ApplicationController
   #顧客側会員ページ
 
+  before_action :authenticate_customer!
+
   def show
     @customer = Customer.find(params[:id])
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   #顧客退会画面
   def unsubscribe
+    @customer = current_customer
   end
 
   #顧客退会処理
