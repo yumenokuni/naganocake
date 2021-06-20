@@ -23,18 +23,21 @@ Rails.application.routes.draw do
 
   # 顧客側ルーティング
   scope module: "public" do
+    get '/customers/my_page' => 'customers#show', as: 'my_page'               #ユーザーマイページ
+    get '/customers/unsubscribe' => "customers#unsubscribe"                   #ユーザー退会
+    patch '/customers/withdraw' => "customers#withdraw"                       #ユーザーステータス更新
+    delete '/cart_items/destroy_all' => "cart_items#destroy_all"              #カート内商品全削除
+    resource :customers, only: [:edit, :update]                               #ユーザー情報
+    resources :cart_items, only: [:index, :create, :update, :destroy]         #カート内商品
+
+    #顧客側devise
     devise_for :customers, controllers: {
-    sessions: 'public/customers/sessions',  #
+    sessions: 'public/customers/sessions',
     paswords: 'public/customers/paswords',
     registrations: 'public/customers/registrations',
   }
-    resources :customers, only: [:edit, :update]                              #ユーザー情報
-    get '/customers/my_page/:id' => 'customers#show', as: 'my_page'           #ユーザーマイページ
-    get '/customers/unsubscribe' => "customers#unsubscribe"                   #ユーザー退会
-    patch '/customers/withdraw' => "customers#withdraw"                       #ユーザーステータス更新
   end
-  
-  #管理者側ルーティング　ジャンル
+
   resources :genres,only: [:index,:create,:edit,:update]
   resources :shippings, only: [:index,:create,:edit,:update,:destroy]         #配送先情報
   resources :products, only: [:index, :show]                                  #顧客側商品
