@@ -38,9 +38,8 @@ Rails.application.routes.draw do
   }
   end
 
-  resources :genres,only: [:index,:create,:edit,:update]
+  resources :genres,only: [:index,:create,:edit,:update,:destroy]
   resources :shippings, only: [:index,:create,:edit,:update,:destroy]         #配送先情報
   resources :products, only: [:index, :show]                                  #顧客側商品
-
 
 end
