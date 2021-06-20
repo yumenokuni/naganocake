@@ -1,0 +1,67 @@
+<!--顧客側会員ページ-->
+
+<div class="container">
+  <div class="row">
+    <h4>会員情報編集</h4>
+  </div>
+
+  <%= form_with model: current_customer, url: customer_path, method: :patch, local: true do |f| %>
+  <div class="row">
+  <div class="col-6 offset-1">
+    <table class="table table-borderless">
+      <tbody>
+
+        <!--氏名-->
+        <tr>
+          <th>氏名</th>
+          <td><%= f.text_field :last_name, autocomplete: "last_name", class: "form-control" %></td>
+          <td><%= f.text_field :first_name, autocomplete: "first_name", class: "form-control" %></td>
+        </tr>
+
+        <!--フリガナ-->
+        <tr>
+          <th>フリガナ</th>
+          <td><%= f.text_field :last_name_kana, autocomplete: "last_name_kana", class: "form-control" %></td>
+          <td><%= f.text_field :first_name_kana, autocomplete: "first_name_kana", class: "form-control" %></td>
+        </tr>
+
+        <!--郵便番号-->
+        <tr>
+          <th>郵便番号</th>
+          <td><%= f.text_field :postal_code, autocomplete: "postal_code", class: "form-control" %></td>
+        </tr>
+
+        <!--住所-->
+        <tr>
+          <th>住所</th>
+          <td><%= f.text_field :address, autocomplete: "address", class: "form-control" %></td>
+        </tr>
+
+        <!--電話番号-->
+        <tr>
+          <th>電話番号</th>
+          <td><%= f.text_field :telephone_number, autocomplete: "telephone_number", class: "form-control" %></td>
+        </tr>
+
+        <!--メールアドレス-->
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= f.text_field :email, autocomplete: "email", class: "form-control" %></td>
+        </tr>
+
+        <!--ボタン-->
+        <tr>
+        　<th></th>
+          <th><%= f.submit "編集内容を保存", class: "btn btn-success btn-lg" %></th>
+          <th></th>
+          <th><%= link_to "退会する",customers_unsubscribe_path, class: "btn btn-danger" %></th>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <% end %>
+
+</div>
+
