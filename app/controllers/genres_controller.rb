@@ -15,11 +15,20 @@ class GenresController < ApplicationController
     @genre = Genre.find(params[:id])
   end
 
+  def destroy
+    @genre = Genre.find(params[:id])
+    @genre.destroy
+    redirect_to genres_path
+  end
+
   def update
+    @genre = Genre.find(params[:id])
+    @genre.update(genre_params)
+    redirect_to genres_path
   end
 
   private
   def genre_params
-    params.require(:genres).permit(:name)
+    params.require(:genre).permit(:name)
   end
 end

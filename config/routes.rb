@@ -28,9 +28,9 @@ Rails.application.routes.draw do
     registrations: 'public/customers/registrations',
   }
   end
-  
+
   #顧客側ルーティング　配送先
   resources :shippings ,only: [:index,:create,:edit,:update,:destroy]
   #管理者側ルーティング　ジャンル
-  resources :genres,only: [:index,:create,:edit,:update]
+  resources :genres,only: [:index,:create,:edit,:update,:destroy]
 end
