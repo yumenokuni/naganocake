@@ -4,13 +4,13 @@ class Admin::ProductsController < ApplicationController
   end
   
   def create
-    @product = PostImage.new(product_params)
+    @product = Product.new(product_params)
     @product.save
-    redirect_to admin_products_path
+    redirect_to admin_products_path(@product)
   end
 
   def index
-    @products = product.all
+    @products = Product.all
   end
 
   def show
@@ -25,7 +25,7 @@ class Admin::ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-    redirect_to admin_products_path
+    redirect_to admin_products_path(@product)
   end
   
   private
