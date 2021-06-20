@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
-  root to: "public/homes#top"
+ 
   get "/about" => "public/homes#about", as: 'about'
 
  # 管理者側deviseルーティング ヤマタツ追記
    devise_for :admin, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
+    sessions:      'admin/sessions',                                        #adminsのsを削除しました
+    passwords:     'admin/passwords',
+    registrations: 'admin/registrations'
   }
 
   # 管理者側ルーティング ヤマタツ追記
@@ -17,10 +17,10 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]                #ジャンル
     resources :orders, only: [:index, :show, :update]                         #注文
     resources :order_products, only: [:update]                                #制作ステータスを更新
-    get '/admins' => 'admins#top'                                             #管理者のトップ画面
+    get 'admin' => 'homes#top'                                             #管理者のトップ画面
     get 'search' => 'products#search'
   end
-
+ root to: "public/homes#top"
   # 顧客側ルーティング
   scope module: "public" do
     get '/customers/my_page' => 'customers#show', as: 'my_page'               #ユーザーマイページ
