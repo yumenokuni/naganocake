@@ -1,8 +1,8 @@
 <% @products.each do |product| %>
-<div>
   <%= attachment_image_tag product, :image, width: '20%', height: '20%' %>
   <p>名前：<%= product.name %></p>
   <p>説明：<%= product.introduction %></p>
   <p>価格：<%= product.price %></p>
- 
-  
+<% end %>
+
+
