@@ -18,9 +18,19 @@ class Public::CustomersController < ApplicationController
 
   #顧客退会処理
   def withdraw
+    @customer = current_customer
+    @customer.update(is_active: false)
+    reset_session
+    redirect_to root_path
   end
 
   def update
+    @customer = current_customer
+    if @customer.update(customer_params)
+      redirect_to my_page_path(@customer.id)
+    else
+      render :edit
+    end
   end
 
   private
