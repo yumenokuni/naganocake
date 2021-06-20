@@ -1,6 +1,7 @@
 <% @products.each do |product| %>
-  <%= attachment_image_tag product, :image, width: '20%', height: '20%' %>
-  <p>名前：<%= product.name %></p>
+  <%= link_to admin_product_path(product), class: "btn-link" do %>
+    <%= product.name %>
+  <% end %>
   <p>説明：<%= product.introduction %></p>
   <p>価格：<%= product.price %></p>
 <% end %>

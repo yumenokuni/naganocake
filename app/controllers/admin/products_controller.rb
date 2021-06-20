@@ -1,4 +1,6 @@
 class Admin::ProductsController < ApplicationController
+  before_action :set_genres, only: [:new, :edit, :index, :create, :update]
+  
   def new
     @product = Product.new
   end
@@ -31,7 +33,11 @@ class Admin::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :image, :introduction, :price)
+    params.require(:product).permit(:name, :image, :introduction, :price, :genre_id, :is_active)
+  end
+  
+  def set_genres
+    @genres = Genre.where(name: true)
   end
   
 end
