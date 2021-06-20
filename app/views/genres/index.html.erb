@@ -1,25 +1,29 @@
 <div class = "container">
-
-
       <h1>ジャンル一覧・追加</h1>
-        <%= form_with model: @genre,url:'/genres', local:true do |f| %>
-　　　     <h4>ジャンル名</h4>
-　　　     <%= f.text_field :name,class: "col-md-4" %>
-　　       <%= f.submit '新規登録', class: "btn btn-info" %>
-　　    <% end %>
 
+      <%= form_with model: @genre, url: genres_path, local:true do |f| %>
+         <div class = "field">
+           <%= f.label :name,"ジャンル名" %>
+           <%= f.text_field :name %>
+           <%= f.submit '新規登録', class: "btn-lg btn-success" %>
+         </div>
+    <% end %>
 
-  <table class="table table-bordered">
+<div class = "row">
+ <div class = "col-md-5">
+  <table class="table table-bordered"style="margin-left:20px;">
         <tr>
           <th>ジャンル</th>
           <td></td>
         </tr>
         <% @genres.each do |genre| %>
           <tr>
-            <th><%= genre.name%></th>
+            <th><%= genre.name %></th>
             <td>
             <%= link_to "編集する", edit_genre_path(genre.id),class:"btn btn-sm btn-success edit_book_36722" %>
-            </td>
-          </tr>
+            <%= link_to "削除する", genre_path(genre.id),class:"btn btn-sm btn-danger destroy_book_36722",method: :delete,"data-confirm" => "本当に削除しますか？"  %>
+
         <% end %>
   </table>
+  </div>
+</div>
