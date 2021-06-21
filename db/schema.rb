@@ -11,7 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 2021_06_20_072753) do
+ActiveRecord::Schema.define(version: 2021_06_21_052802) do
+
+
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -56,6 +58,19 @@ ActiveRecord::Schema.define(version: 2021_06_20_072753) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "shipping_cost"
+    t.integer "total_payment"
+    t.integer "how_to_pay", default: 0
+    t.integer "order_status", default: 0
+    t.string "postal_code"
+    t.string "address"
+    t.string "receiver_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
