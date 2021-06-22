@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
- 
+
   get "/about" => "public/homes#about", as: 'about'
 
  # 管理者側deviseルーティング ヤマタツ追記
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products                                                       #商品情報
     resources :customers, only: [:index, :show, :edit, :update]               #ユーザー情報
-    resources :genres, only: [:index, :create, :edit, :update]                #ジャンル
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]      #ジャンル
     resources :orders, only: [:index, :show, :update]                         #注文
     resources :order_products, only: [:update]                                #制作ステータスを更新
     get 'admin' => 'homes#top'                                             #管理者のトップ画面
@@ -29,17 +29,18 @@ Rails.application.routes.draw do
     delete '/cart_items/destroy_all' => "cart_items#destroy_all"              #カート内商品全削除
     resource :customers, only: [:edit, :update]                               #ユーザー情報
     resources :cart_items, only: [:index, :create, :update, :destroy]         #カート内商品
+    resources :shippings, only: [:index,:create,:edit,:update,:destroy]       #配送先情報
 
     #顧客側devise
     devise_for :customers, controllers: {
-    sessions: 'public/customers/sessions',
-    paswords: 'public/customers/paswords',
-    registrations: 'public/customers/registrations',
-  }
+      sessions: 'public/customers/sessions',
+      paswords: 'public/customers/paswords',
+      registrations: 'public/customers/registrations',
+    }
   end
 
-  resources :genres,only: [:index,:create,:edit,:update,:destroy]
-  resources :shippings, only: [:index,:create,:edit,:update,:destroy]         #配送先情報
+
+
   resources :products, only: [:index, :show]                                  #顧客側商品
 
 end
