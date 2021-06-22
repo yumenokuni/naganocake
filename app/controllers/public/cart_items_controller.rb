@@ -1,4 +1,6 @@
 class Public::CartItemsController < ApplicationController
+  #カート内商品ページ
+
   before_action :authenticate_customer!
 
   def index
