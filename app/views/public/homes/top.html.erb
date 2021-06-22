@@ -1,33 +1,27 @@
+<!--TOPページ-->
+
 <div class="container">
   <div class="row">
+    <div class="col align-self-center">
 
-    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <p class="text-center">
+        ようこそ、<strong>ながのCAKE</strong>へ！<br>
+        このサイトは、ケーキ販売のECサイトになります。<br>
+        会員でない⽅も商品の閲覧はできますが、<br>
+        購⼊には会員登録が必要になります。<br>
+      </p>
 
-    <!--サンプルで画像入れました-->
-    <img class="card-img" src="assets/cake1.jpg" alt="">
-
-      <!--ここのテキストはとりあえずapplication.scssで真ん中にしてます-->
-      <div class="card-img-overlay">
-        <p class="bg-secondary text-light">
-          ようこそ、ながのCAKEへ！<br>
-          このサイトは、ケーキ販売のECサイトになります。<br>
-          会員でない⽅も商品の閲覧はできますが、<br>
-          購⼊には会員登録が必要になります。<br>
-        </p>
+      <!--サンプルで画像入れました-->
+      <div class="text-center">
+        <%= image_tag 'cake1.jpg', width: '50%', height: '50%' %>
       </div>
 
     </div>
-
   </div>
 </div>
 
+
+
 <!--後で消します-->
-<p>↓後で消します↓</p>
 
-<%= link_to "新規登録", new_customer_registration_path %><br>
-<%= link_to "ログイン", new_customer_session_path %><br>
-<%= link_to "ログアウト", destroy_customer_session_path, method: :delete %><br>
-<%= link_to "マイページ", my_page_path %>
-
-<!--ここに新着商品いれます-->
 <h2>ここに新着商品いれます</h2>

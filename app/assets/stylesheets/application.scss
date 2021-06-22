@@ -18,9 +18,14 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-.card-img-overlay{
+* {
+  margin: 0;
   padding: 0;
-  top: calc(50% - 0.5rem);
-  text-align: center;
-  font-weight: bold;
+  box-sizing: border-box;;
+ }
+
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
