@@ -21,8 +21,6 @@ Rails.application.routes.draw do
     get 'search' => 'products#search'
   end
 
-
-
   # 顧客側ルーティング
   scope module: "public" do
     get '/customers/my_page' => 'customers#show', as: 'my_page'               #ユーザーマイページ
