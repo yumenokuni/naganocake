@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :products                                                       #商品情報
     resources :customers, only: [:index, :show, :edit, :update]               #ユーザー情報
     resources :genres, only: [:index, :create, :edit, :update]                #ジャンル
-    resources :orders, only: [:index, :show, :update]                         #注文
+    resources :orders, only: [:index, :show, :update,]                         #注文
     resources :order_products, only: [:update]                                #制作ステータスを更新
     get 'admin' => 'homes#top'                                                #管理者のトップ画面
     get 'search' => 'products#search'
@@ -41,5 +41,7 @@ Rails.application.routes.draw do
   resources :genres,only: [:index,:create,:edit,:update,:destroy]
   resources :shippings, only: [:index,:create,:edit,:update,:destroy]         #配送先情報
   resources :products, only: [:index, :show]                                  #顧客側商品
-
+  resources :orders, only: [:new, :create, :show, :index]
+  post "/orders/confirm" => "orders#confirm"
+  get "/orders/thanks" => "orders#thanks"
 end
