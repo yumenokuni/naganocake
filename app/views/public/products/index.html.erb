@@ -1,7 +1,7 @@
 <div class="container my-5">
   <div class="row mb-3">
     <div class="col-md-3 offset-md-1">
-      <h4 class="bg-light text-center">注文履歴一覧</h4>
+      <h4 class="bg-light text-center">商品一覧</h4>
     </div>
   </div>
   <div class="row">
@@ -10,7 +10,7 @@
         <table class="table table-hover border-bottom">
           <thead>
             <tr>
-              <th>商品ID</th>
+              <th>商品画像</th>
               <th>商品名</th>
               <th>税込価格(税抜価格)</th>
               <th>ジャンル</th>
@@ -20,9 +20,11 @@
           <tbody>
             <% @products.each do |product| %>
               <tr>
-                <td><%= product.id %></td>
+                <td id="img_field">
+                  <%= attachment_image_tag(product, :image, size: "300x220", fallback: "no_image.jpg") %>
+                </td>
                 <td>
-                  <%= link_to admin_product_path(product), class: "btn-link" do %>
+                  <%= link_to product_path(product), class: "btn-link" do %>
                     <%= product.name %>
                   <% end %>
                 </td>
@@ -32,7 +34,7 @@
                   <% if product.is_active == true %>
                     <i class="fas fa-bullseye red"></i>販売中
                   <% elsif product.is_active == false %>
-                    <i class="fas fa-bullseye blue"></i>売り切れ
+                    <i class="fas fa-bullseye blue"></i>販売停止中
                   <% end %>
                 </td>
               </tr>
@@ -43,5 +45,4 @@
     </div>
   </div>
 </div>
-
 
