@@ -1,0 +1,121 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-2">
+      <h4 class="bg-light text-center">注文履歴詳細</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 my-3">
+      <div class="order-show">
+        <table>
+          <tr>
+            <td>購入者</td>
+            <td><%= @order.customer.family_name + @order.customer.first_name %></td>
+          </tr>
+          <tr>
+            <td>注文日</td>
+            <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+          </tr>
+          <tr>
+            <td>配送先</td>
+            <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.receiver_name %></td>
+          </tr>
+          <tr>
+            <td>支払方法</td>
+            <td>
+              <% case @order.how_to_pay %>
+                <% when 0 %>
+                  クレジットカード
+                <% when 1 %>
+                  銀行振込
+                <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>注文ステータス</td>
+            <td>
+              <% if @order.order_status < 2 %>
+                <%= form_with model: @order, url: admin_order_path do |f| %>
+                  <%= f.select :order_status, [["入金待ち","0"],["入金確認","1"]], included_blank: "#{@order.order_status}" %>
+                  <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+                <% end %>
+              <% elsif @order.order_status > 2 %>
+                <%= form_with model: @order, url: admin_order_path do |f| %>
+                  <%= f.select :order_status, [["発送準備中","3"],["発送済み","4"]], included_blank: "#{@order.order_status}" %>
+                  <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+                <% end %>
+              <% else %>
+                製作中（制作ステータスが全て「制作完了」になると自動更新されます）
+              <% end %>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-9 mb-4">
+      <div class="products">
+        <table class="table table-borderless" style="table-layout:fixed;">
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>単価（税込）</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th>制作ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @ordered_products.each do |prod| %>
+              <tr>
+                <td><%= prod.product.name %></td>
+                <td><%= (prod.product.price*$tax).floor %></td>
+                <td><%= prod.count %></td>
+                <td><%= (prod.product.price*$tax).floor*prod.count %></td>
+                <td>
+                  <% if prod.production_status == 0 %>
+                    制作不可（注文ステータスが「入金確認」になると自動更新されます）
+                  <% elsif prod.production_status == 1 %>
+                    <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
+                      <%= f.select :production_status, [["制作待ち","1"],["製作中","2"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+                    <% end %>
+                  <% elsif prod.production_status == 3 %>
+                    <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
+                      <%= f.select :production_status, [["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+                    <% end %>
+                  <% else %>
+                    <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
+                      <%= f.select :production_status, [["制作待ち","1"],["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-3 d-flex justify-content-center align-items-end mb-5">
+      <div class="payment-info-show">
+        <table>
+          <tr>
+            <td><strong>商品合計</strong></td>
+            <td><%= @order.total_payment - $ship %></td>
+          </tr>
+          <tr>
+            <td><strong>配送料</strong></td>
+            <td><%= $ship %></td>
+          </tr>
+          <tr>
+            <td><strong>請求金額合計</strong></td>
+            <td><strong><%= @order.total_payment %></strong></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,40 +4,27 @@
     <title>Naganocake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+
+    <!--ヘッダー-->
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="/"><span>Naganocake</span></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <% if customer_signed_in? %>
-                <li class="fas fa-home nav-link text-light">Home</li>
-                <li class="fas fa-users nav-link text-light">Myp</li>
-                <li class="fas fa-store nav-link text-light">products</li>
-                <li class="fas fa-sign-out-alt nav-link text-light">logout</li>
-              <% else %>
-                <li><%= link_to ' Home',root_path,class: 'fas fa-home nav-link text-light' %></li>
-                <li><%= link_to ' About',about_path,class: 'fas fa-link nav-link text-light' %></li>
-                <li class="fas fa-store nav-link text-light">produkts</li>
-                <li><%= link_to ' sign up', new_customer_registration_path,class: 'fas fa-hat-wizard nav-link text-light' %></li>
-                <li><%= link_to ' login', new_customer_session_path ,class: 'fas fa-sign-in-alt nav-link text-light'%></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </nav>
+      <%= render 'layouts/header' %>
     </header>
+
     <main>
       <%= yield %>
     </main>
+
+    <!--フッター-->
+    <footer>  <!--位置はapplication.csccで修正できます-->
+      <%= render 'layouts/footer' %>
+    </footer>
+
   </body>
 </html>
