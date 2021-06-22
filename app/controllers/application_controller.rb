@@ -13,17 +13,13 @@ class ApplicationController < ActionController::Base
 
   #ログイン後遷移先
   def after_sign_in_path_for(resource)
-	  root_path
+    case resource
+      when Admin
+        admin_orders_path          #pathは設定したい遷移先へのpathを指定してください
+      when Customer
+        root_path              #ここもpathはご自由に変更してください
+    end
   end
-
-  #adminの設定？
-  # def after_sign_in_path_for(resource)
-  #   if admin
-  #     admins_orders_path
-  #   else
-  #     root_path
-  #   end
-  # end
 
   private
   def configure_permitted_parameters
