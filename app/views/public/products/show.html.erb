@@ -30,9 +30,9 @@
         <div class="field">
           <% if @product.is_active == true %>
             <%= form_for(@cart_item , url: cart_items_path, method: :post) do |f| %>
-		          <%= f.hidden_field :product_id %>
+		          <%= f.hidden_field :product_id, :value => @product.id %>
 		          <%= f.submit "カートに入れる", class: 'btn btn-primary col-xs-5' %>
-		          <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %>
+		          <%= f.select :amount, [*1..100] %>
 	          <% end %>
 	        <% else @product.is_active == false %>
             <h3>売り切れ中</h3>

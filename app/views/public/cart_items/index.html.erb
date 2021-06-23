@@ -20,8 +20,8 @@
         <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete, class: 'btn btn-danger', 'data-confirm' => '本当によろしいですか？' %>
       </p>
 
-      <table class='table table-bordered'>
-        <thead>
+      <table class='table table-bordered table-hover'>
+        <thead class="thead-dark">
           <tr>
             <th class='text-center'>商品名</th>
             <th class='text-center'>単価(税込)</th>
@@ -31,18 +31,22 @@
           </tr>
         </thead>
 
+        <% @sum = 0 %>
         <% @cart_items.each do |cart_item| %>
         <tbody>
           <tr>
+            <!--商品名-->
             <td class='text-center'>
               <%= attachment_image_tag cart_item.product, :image, size: "50x40", fallback: "no_image.jpg" %>
               <%= cart_item.product.name %>
             </td>
 
+            <!--単価(税込)-->
             <td class='text-center'>
               <%= (cart_item.product.price.to_i * 1.1).round %>円
             </td>
 
+            <!--数量-->
             <td class='text-center'>
               <%= form_with url: cart_item_path(cart_item.id), model: cart_item, local: true do |f| %>
                 <%= f.select :amount, [*1..100], class: 'form-control' %>
@@ -50,14 +54,14 @@
               <% end %>
             </td>
 
+            <!--小計-->
             <td class='text-center'>
-              <%= (cart_item.product.price.to_i * cart_item.amount * 1.1) %>円
+              <%= (cart_item.product.price.to_i * cart_item.amount * 1.1).round %>円
             </td>
 
+            <!--削除ボタン-->
             <td class='text-center'>
-              <!--↓後で変更↓-->
-              <div class='btn btn-danger'>削除する</div>
-              <!--link_to '削除する', cart_item_path(cart_item.id), method: :delete, class: 'btn btn-danger'-->
+              <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, class: 'btn btn-danger' %>
             </td>
 
           </tr>
@@ -84,9 +88,7 @@
             <th class='text-center'>合計</th>
 
             <th class='text-center'>
-              <% @sum = 0 %>
-              <% @sum += (cart_item.product.price * cart_item.amount * 1.1).to_i  %>
-              <%= @sum.to_i(:delimited) %>円
+              0円    <!--確認します！-->
             </th>
 
           </tr>
