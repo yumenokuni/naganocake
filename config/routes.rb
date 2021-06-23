@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
-  root to: 'public/homes#top'
-  get '/about' => 'public/homes#about', as: 'about'
+
+root to: "public/homes#top"
+  get "/about" => "public/homes#about", as: 'about'
 
  # 管理者側deviseルーティング
     devise_for :admin, controllers: {
@@ -10,23 +11,23 @@ Rails.application.routes.draw do
     registrations: 'admin/registrations'
   }
 
-  # 管理者側ルーティング
+  # 管理者側ルーティング ヤマタツ追記
   namespace :admin do
     resources :products                                                       #商品情報
     resources :customers, only: [:index, :show, :edit, :update]               #ユーザー情報
-    resources :genres, only: [:index, :create, :edit, :update]                #ジャンル
-    resources :orders, only: [:index, :show, :update,]                        #注文
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]      #ジャンル
+    resources :orders, only: [:index, :show, :update]                         #注文
     resources :order_products, only: [:update]                                #制作ステータスを更新
-    get 'admin' => 'homes#top'                                                #管理者のトップ画面
+    get 'admin' => 'homes#top'                                             #管理者のトップ画面
     get 'search' => 'products#search'
   end
-
+ 
   # 顧客側ルーティング
-  scope module: 'public' do
+  scope module: "public" do
     get '/customers/my_page' => 'customers#show', as: 'my_page'               #ユーザーマイページ
-    get '/customers/unsubscribe' => 'customers#unsubscribe'                   #ユーザー退会
-    patch '/customers/withdraw' => 'customers#withdraw'                       #ユーザーステータス更新
-    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'              #カート内商品全削除
+    get '/customers/unsubscribe' => "customers#unsubscribe"                   #ユーザー退会
+    patch '/customers/withdraw' => "customers#withdraw"                       #ユーザーステータス更新
+    delete '/cart_items/destroy_all' => "cart_items#destroy_all"              #カート内商品全削除
     resource :customers, only: [:edit, :update]                               #ユーザー情報
     resources :cart_items, only: [:index, :create, :update, :destroy]         #カート内商品
     resources :shippings, only: [:index,:create,:edit,:update,:destroy]       #配送先情報
@@ -40,7 +41,7 @@ Rails.application.routes.draw do
     }
   end
 
-  resources :orders, only: [:new, :create, :show, :index]                     #注文
-  post '/orders/confirm' => 'orders#confirm'
-  get '/orders/thanks' => 'orders#thanks'
+  resources :orders, only: [:new, :create, :show, :index]
+  post "/orders/confirm" => "orders#confirm"
+  get "/orders/thanks" => "orders#thanks"
 end
