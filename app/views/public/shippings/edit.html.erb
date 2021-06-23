@@ -1,29 +1,29 @@
 <div class = "container">
   <div class="row">
      <div class = "offset-md-1 col-md-4">
-　   <h2>配送先編集</h2>
-　   </div>
-　</div>
+     <h2>配送先編集</h2>
+     </div>
+  </div>
 
     <div class="row">
        <div class = "offset-md-1 col-md-9">
-    　  <%= form_with model: @shipping,url:"/shippings/#{@shipping.id}", local:true do |f| %>
-    　  <table>
-    　    <tr>
-    　     <div class = "field">
+        <%= form_with model: @shipping,url:"/shippings/#{@shipping.id}", local:true do |f| %>
+        <table>
+          <tr>
+           <div class = "field">
            <th><%= f.label :postal_code, "郵便番号(ハイフンなし)" %><br /></th>
-    　      <th><%= f.text_field :postal_code %></th>
-    　     </div>
+            <th><%= f.text_field :postal_code %></th>
+           </div>
          </tr>
         </table>
 
         <table>
           <tr>
-    　      <div class = "field">
-    　       <th><%= f.label :address, "住所" %><br /></th>
-    　       <th><%= f.text_field :address%></th>
-    　      </div>
-    　     </tr>
+            <div class = "field">
+             <th><%= f.label :address, "住所" %><br /></th>
+             <th><%= f.text_field :address%></th>
+            </div>
+           </tr>
         </table>
         <table>
           <tr>
@@ -35,7 +35,7 @@
            <th><%= f.submit '変更内容を保存',class:"btn-lg btn-success" %></th>
           </div>
          </tr>
-    　　</table>
+        </table>
       <% end %>
-　      </div>
+        </div>
     </div>
