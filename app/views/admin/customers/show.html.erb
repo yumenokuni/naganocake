@@ -1,18 +1,23 @@
 <!--管理者側会員ページ-->
 
-<div class='container'>
-  <div class='row'>
-    <h4>
-      <strong><%= @customer.last_name %><%= @customer.first_name %></strong>
-      さんの会員詳細
-    </h4>
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-5 offset-md-1'>
+
+      <h4>
+        <strong><%= @customer.last_name %><%= @customer.first_name %></strong>
+        さんの会員詳細
+      </h4>
+
+    </div>
   </div>
 
   <div class='row'>
-    <div class='col-6 offset-1'>
+    <div class='col-md-6 offset-md-1'>
 
-      <table class='table table-borderless'>
-        <tbody>
+    <table class='table table-bordered'>
+      <tbody>
 
           <!--会員ID-->
           <tr>
@@ -72,19 +77,19 @@
             <% end %>
           </tr>
 
-        </tbody>
-      </table>
+      </tbody>
+    </table>
 
     </div>
   </div>
 
   <!--ボタン-->
   <div class='row'>
-    <div class='col-2 offset-3'>
+    <div class='pt-5 col-2 offset-3'>
       <%= link_to '編集する', edit_admin_customer_path(@customer.id), class: 'btn btn-success' %>
     </div>
 
-    <div class='col-3'>
+    <div class='pt-5 col-3'>
       <%= link_to '注文履歴一覧を見る', admin_customer_path(@customer.id), class: 'btn btn-primary' %>　<!--リンク後で変更します-->
     </div>
   </div>
