@@ -1,17 +1,17 @@
 <!--管理者側会員ページ-->
 
-<div class="container">
-  <div class="row">
+<div class='container'>
+  <div class='row'>
     <h4>
       <strong><%= @customer.last_name %><%= @customer.first_name %></strong>
       さんの会員詳細
     </h4>
   </div>
 
-  <div class="row">
-    <div class="col-6 offset-1">
+  <div class='row'>
+    <div class='col-6 offset-1'>
 
-      <table class="table table-borderless">
+      <table class='table table-borderless'>
         <tbody>
 
           <!--会員ID-->
@@ -66,9 +66,9 @@
           <tr>
             <th>会員ステータス</th>
             <% if @customer.is_active? %>
-             <td class="text-success">有効</td>
+             <td class='text-success'>有効</td>
             <% else %>
-             <td class="text-secondary">退会</td>
+             <td class='text-secondary'>退会</td>
             <% end %>
           </tr>
 
@@ -79,13 +79,13 @@
   </div>
 
   <!--ボタン-->
-  <div class="row">
-    <div class="col-2 offset-3">
-      <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %>
+  <div class='row'>
+    <div class='col-2 offset-3'>
+      <%= link_to '編集する', edit_admin_customer_path(@customer.id), class: 'btn btn-success' %>
     </div>
 
-    <div class="col-3">
-      <%= link_to "注文履歴一覧を見る", admin_customer_path(@customer.id), class: "btn btn-primary" %>　<!--リンク後で変更します-->
+    <div class='col-3'>
+      <%= link_to '注文履歴一覧を見る', admin_customer_path(@customer.id), class: 'btn btn-primary' %>　<!--リンク後で変更します-->
     </div>
   </div>
 

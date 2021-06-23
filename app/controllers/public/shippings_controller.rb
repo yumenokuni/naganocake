@@ -1,4 +1,4 @@
-class ShippingsController < ApplicationController
+class Public::ShippingsController < ApplicationController
 
  def index
     @shipping = Shipping.new
@@ -7,6 +7,7 @@ class ShippingsController < ApplicationController
 
  def create
     shipping = Shipping.new(shipping_params)
+    shipping.customer_id = current_customer.id
     shipping.save
     redirect_to shippings_path
  end

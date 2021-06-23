@@ -1,14 +1,27 @@
 <!--顧客側会員ページ-->
 
-<div class="text-center">
-  <h4>本当に退会しますか？</h4>
-  <br>
-  <br>
-  <p>退会すると、会員登録情報や</p>
-  <p>これまでの購⼊履歴が閲覧できなくなります。</p>
-  <p>退会する場合は、「退会する」をクリックしてください。</p>
 
-  <%= link_to "退会しない",my_page_path(@customer.id), class: "btn btn-primary" %>
-  <%= link_to "退会する",customers_withdraw_path(@customer.id), method: :patch, class: "btn btn-danger", "data-confirm" => "本当によろしいですか？" %>
-  <!--念のためダイアログ出るようにしました-->
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-10 offset-md-1'>
+
+      <h3 class='text-center'>本当に退会しますか？</h3>
+
+      <div class='p-3 text-center'>
+        <p>退会すると、会員登録情報や</p>
+        <p>これまでの購⼊履歴が閲覧できなくなります。</p>
+        <p>退会する場合は、「退会する」をクリックしてください。</p>
+      </div>
+
+
+      <div class='p-3 text-center'>
+        <%= link_to '退会しない',my_page_path(@customer.id), class: 'btn btn-primary btn-lg' %>
+        <%= link_to '退会する',customers_withdraw_path(@customer.id), method: :patch, class: 'btn btn-danger', 'data-confirm' => '本当によろしいですか？' %>
+        <!--念のためダイアログ出るようにしました-->
+      </div>
+
+    </div>
+  </div>
+
 </div>
