@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/about' => 'public/homes#about', as: 'about'
 
  # 管理者側deviseルーティング
-   devise_for :admin, controllers: {
+    devise_for :admin, controllers: {
     sessions:      'admin/sessions',
     passwords:     'admin/passwords',
     registrations: 'admin/registrations'
