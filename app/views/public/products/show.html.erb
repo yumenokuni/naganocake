@@ -24,18 +24,19 @@
         </div>
         <div class="field">
           <p>
-            税込価格（税抜価格）:<%= (@product.price.to_i*1.1).round %>（<%= @product.price%>）円
+            税込価格（税抜価格）:<%= (@product.price.to_i*1.1).round %>（<%= @product.price %>）円
           </p>
         </div>
         <div class="field">
-          <p>
-            販売ステータス
-            <% if @product.is_active == true %>
-              <i class="fas fa-bullseye red"></i>販売中
-            <% elsif @product.is_active == false %>
-              <i class="fas fa-bullseye blue"></i>販売停止中
-            <% end %>
-          </p>
+          <% if @product.is_active == true %>
+            <%= form_for(@cart_item , url: cart_items_path, method: :post) do |f| %>
+		          <%= f.hidden_field :product_id %>
+		          <%= f.submit "カートに入れる", class: 'btn btn-primary col-xs-5' %>
+		          <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %>
+	          <% end %>
+	        <% else @product.is_active == false %>
+            <h3>売り切れ中</h3>
+          <% end %>
         </div>
       </div>
     </div>

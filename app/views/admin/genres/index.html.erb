@@ -1,13 +1,13 @@
 <div class = "container">
       <h1>ジャンル一覧・追加</h1>
 
-      <%= form_with model: @genre, url: genres_path, local:true do |f| %>
+      <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
          <div class = "field">
            <%= f.label :name,"ジャンル名" %>
            <%= f.text_field :name %>
            <%= f.submit '新規登録', class: "btn-lg btn-success" %>
          </div>
-    <% end %>
+    　　<% end %>
 
 <div class = "row">
  <div class = "col-md-5">
@@ -20,8 +20,8 @@
           <tr>
             <th><%= genre.name %></th>
             <td>
-            <%= link_to "編集する", edit_genre_path(genre.id),class:"btn btn-sm btn-success edit_book_36722" %>
-            <%= link_to "削除する", genre_path(genre.id),class:"btn btn-sm btn-danger destroy_book_36722",method: :delete,"data-confirm" => "本当に削除しますか？"  %>
+            <%= link_to "編集する", edit_admin_genre_path(genre.id),class:"btn btn-sm btn-success edit_book_36722" %>
+            <%= link_to "削除する", admin_genre_path(genre.id),class:"btn btn-sm btn-danger destroy_book_36722",method: :delete,"data-confirm" => "本当に削除しますか？"  %>
 
         <% end %>
   </table>

@@ -89,7 +89,6 @@ ActiveRecord::Schema.define(version: 2021_06_21_052802) do
     t.string "postal_code"
     t.string "address"
     t.datetime "created_at", null: false
-    t.datetime "update_at"
     t.datetime "updated_at", null: false
   end
 
