@@ -39,7 +39,7 @@
         </div>
         <div class="actions col-xs-9">
           <%= link_to "編集する", edit_admin_product_path(@product), data: {"turbolinks" => false}, class: "glyphicon glyphicon-pencil btn btn-success pull-right edit_product_#{@product.id}" %>
-          <%= link_to 'Destroy', admin_product_path(@product), method: :delete, data: { confirm: '本当に消しますか？' }, class: "glyphicon glyphicon-pencil btn btn-success pull-right destroy_product_#{@product.id}"%>
+          <%= link_to '削除する', admin_product_path(@product), method: :delete, data: { confirm: '本当に消しますか？' }, class: "glyphicon glyphicon-pencil btn btn-success pull-right destroy_product_#{@product.id}"%>
         </div>
       </div>
     </div>
