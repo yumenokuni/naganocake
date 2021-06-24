@@ -13,10 +13,10 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap";
+@import 'bootstrap';
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 
 * {
   margin: 0;
@@ -24,8 +24,18 @@
   box-sizing: border-box;;
  }
 
+ header {
+  font-family: 'Caveat', cursive;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+ }
+
 footer {
   width: 100%;
   position: absolute;
   bottom: 0;
+
+  font-family: 'Caveat', cursive;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
 }
