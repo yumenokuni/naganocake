@@ -1,4 +1,4 @@
-<div class = "offset-md-2 col-md-4">
+<div class = "offset-md-1 col-md-4">
       <h1>配送先登録/一覧</h1>
     </div>
   </div>
@@ -7,24 +7,24 @@
     <div class = "offset-md-1 col-md-9">
       <%= form_with model: @shipping, url:'/shippings', local:true do |f| %>
 
-      <div class="row">
+      <div class="row"style="padding-bottom:10px;">
         <div class = "col-md-3">
           <%= f.label :postal_code,"郵便番号(ハイフンなし)" %>
         </div>
           <%= f.text_field :postal_code,class: "col-md-4" %>
       </div>
-      <div class="row">
+      <div class="row"style="padding-bottom:10px;">
         <div class = "col-md-3">
           <%= f.label :address,"住所" %>
         </div>
         <%= f.text_field :address,class: "col-md-6"%>
       </div>
 
-      <div class="row">
+      <div class="row"style="padding-bottom:10px;">
         <div class = "col-md-3">
           <%= f.label :name,"宛名" %>
         </div>
-          <%= f.text_field :name,class: "col-md-4"  %>
+          <%= f.text_field :name,class: "col-md-4" %>
           <%= f.submit '新規登録',class: "col-md-2 btn-lg btn-success"  %>
         </div>
       </div>
@@ -33,7 +33,8 @@
     </div>
 
 
-    <div class="row">
+    <div class="row"style="padding-top:30px;">
+      <div class = "offset-md-1 col-md-7">
         <table class="table table-bordered">
             <tr>
                 <th>郵便番号</th>
@@ -53,5 +54,6 @@
               </tr>
             <% end %>
         </table>
+      </div>
      </div>
   </div>
