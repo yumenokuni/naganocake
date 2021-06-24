@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
       when Admin
         admin_orders_path          #pathは設定したい遷移先へのpathを指定してください
       when Customer
-        root_path              #ここもpathはご自由に変更してください
+        root_path              
     end
   end
 
