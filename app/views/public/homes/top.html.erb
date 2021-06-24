@@ -21,7 +21,44 @@
 </div>
 
 
+<!--新着商品-->
+<div class='container my-5'>
 
-<!--後で消します-->
+  <div class='row mb-3'>
+      <h3>新着商品</h3>
+  </div>
 
-<h2>ここに新着商品いれます</h2>
+  <div class='row'>
+    <% @products.each do |product| %>
+    <table class='table-hover col-3'>
+
+      <!--画像-->
+      <tr>
+        <td class='text-center'>
+          <%= link_to product_path(product) do %>
+            <%= attachment_image_tag(product, :image, size: '300x220', fallback: 'no_image.jpg') %>
+          <% end %>
+        </td>
+      </tr>
+
+      <!--商品名-->
+      <tr>
+        <td class='text-center'><%= product.name %></td>
+      </tr>
+
+      <!--値段-->
+      <tr>
+        <td class='text-center'>¥<%= product.price %></td>
+      </tr>
+
+    </table>
+    <% end %>
+  </div>
+
+  <div style='text-align: right;'>
+    <u>
+      <%= link_to '全ての商品を見る >', products_path %>
+    </u>
+  </div>
+
+</div>
