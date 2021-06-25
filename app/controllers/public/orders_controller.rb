@@ -4,7 +4,7 @@ class Public::OrdersController < ApplicationController
   def new
     @customer = current_customer
     if current_customer.cart_items.count == 0
-      flash[:notice] = "カートは空です"
+      flash[:notice] = 'カートは空です'
       redirect_back(fallback_location: root_path)
     end
   end
@@ -13,30 +13,30 @@ class Public::OrdersController < ApplicationController
     @customer = current_customer
     @order = Order.new
     case params[:how_to_pay]
-    when "0"
-      @how_to_pay = "クレジットカード"
-    when "1"
-      @how_to_pay = "銀行振込"
+    when '0'
+      @how_to_pay = 'クレジットカード'
+    when '1'
+      @how_to_pay = '銀行振込'
     end
 
     case params[:select]
-    when "0"
+    when '0'
       @p_code = params[:postal_code0]
       @address = params[:address0]
       @name = params[:receiver_name0]
-    when "1"
+    when '1'
       if @customer.receivers.count != 0
         receiver = Receiver.find_by(postal_code: params[:postal_code1])
         @p_code = receiver.postal_code
         @address = receiver.address
         @name = receiver.name
       else
-        flash[:notice] = "配送先は登録されていません"
+        flash[:notice] = '配送先は登録されていません'
         render :new
       end
-    when "2"
+    when '2'
       if params[:postal_code2].blank? || params[:address2].blank? || params[:receiver_name2].blank?
-        flash[:notice] = "選択されたフォームに空欄があります"
+        flash[:notice] = '選択されたフォームに空欄があります'
         render :new
       else
         @p_code = params[:postal_code2]
@@ -68,7 +68,7 @@ class Public::OrdersController < ApplicationController
       @cart_items.destroy_all
       redirect_to orders_thanks_path
     else
-      flash[:notice] = "注文を確定できませんでした"
+      flash[:notice] = '注文を確定できませんでした'
       redirect_to new_order_path
     end
 

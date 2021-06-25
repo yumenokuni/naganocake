@@ -1,39 +1,58 @@
-<h2 class="head-line title_h2 text-center">商品詳細</h2>
-  <div class="row" style="width: 90%; margin: 20px auto;">
-    <div class="col-sm-5">
-      <%= attachment_image_tag(@product, :image, size: "300x220", fallback: "no_image.jpg") %>
+<!--顧客側商品詳細ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-5'>
+    <div class='col-md-9 offset-md-1'>
+
+			<!--商品名-->
+      <h4 class='text-center'><strong><%= @product.name %></strong></h4>
+
     </div>
-		<div class="col-xs-7">
-			<table class="table">
-				<tr>
-					<td style="border-top: none;" class="col-xs-4">商品名</td>
-					<td style="border-top: none;" class="product" class="col-xs-8"><%= @product.name %></td>
+  </div>
+
+  <div class='row' style='width: 90%; margin: 20px auto;'>
+
+  	<!--商品画像-->
+		<div class='col-sm-5'>
+      <%= attachment_image_tag(@product, :image, size: '300x220', fallback: 'no_image.jpg') %>
+    </div>
+
+    <div class='col-xs-7 pt-5'>
+    	<table class='table table-borderless'>
+
+ 				<tr>
+					<th style='border-top: none;' class='col-xs-4'>商品説明</th>
+					<td style='border-top: none;' class='product col-xs-8'><%= @product.introduction %></td>
 				</tr>
+
 				<tr>
-					<td style="border-top: none;">商品説明</td>
-					<td style="border-top: none;" class="product"><%= @product.introduction %></td>
+					<th style='border-top: none;'>税抜価格（税込価格）</th>
+					<td style='border-top: none;' class='product'><%= (@product.price.to_i*1.1).round %>（<%= @product.price %>）円</td>
 				</tr>
-				<tr>
-					<td style="border-top: none;">ジャンル</td>
-					<td style="border-top: none;" class="product"><%= @product.genre.name %></td>
-				</tr>
-				<tr>
-					<td style="border-top: none;">税抜価格（税込価格）</td>
-					<td style="border-top: none;" class="product"><%= (@product.price.to_i*1.1).round %>（<%= @product.price %>）円</td>
-				</tr>
-        <tr>
-          <td style="border-top: none;">
-            <% if @product.is_active == true %>
-              <%= form_for(@cart_item , url: cart_items_path, method: :post) do |f| %>
-		            <%= f.hidden_field :product_id, :value => @product.id %>
-		            <%= f.submit "カートに入れる", class: 'btn btn-primary col-xs-5' %>
-		            <%= f.select :amount, [*1..100] %>
-	            <% end %>
-	          <% else @product.is_active == false %>
-              <h3>売り切れ中</h3>
-            <% end %>
-          </td>
-        </tr>
+
       </table>
     </div>
   </div>
+</div>
+
+<!--カートに入れる-->
+<div class='container my-5'>
+	<div class='row  mb-5'>
+    <div class='col-md-9 offset-md-1 pt-5 text-right'>
+
+     <% if @product.is_active == true %>
+		 	<%= form_for(@cart_item , url: cart_items_path, method: :post) do |f| %>
+		  	<%= f.hidden_field :product_id, :value => @product.id %>
+		  	<%= f.submit 'カートに入れる', class: 'btn btn-primary btn-lg w-25' %>
+		  	<%= f.select :amount, [*1..100] %>
+		 	<% end %>
+
+	  <% else @product.is_active == false %>
+	  	<h3>売り切れ中</h3>
+
+		<% end %>
+
+    </div>
+  </div>
+</div>

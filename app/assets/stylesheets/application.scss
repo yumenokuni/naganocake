@@ -18,12 +18,10 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
-@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
-
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;;
+  box-sizing: border-box;
  }
 
 header {
@@ -32,6 +30,7 @@ header {
 
 body {
   font-family: 'Kosugi Maru', sans-serif;
+  background-color: #faf0e6;
 }
 
 footer {
@@ -39,7 +38,7 @@ footer {
   position: fixed;
   bottom: 0;
 
-  font-family: 'Caveat', cursive, 'Kosugi Maru', sans-serif;
+  font-family: 'Caveat', cursive;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -49,14 +48,31 @@ footer {
    background-size: cover;
    background-repeat: no-repeat;
    height: 70vh;
+   width: 100%;
    position: relative;
    background-position: center;
 }
 
+//ようこそ〇〇さん
 .welcome {
   color: white;
   border: solid 3px white;
   padding: 0.5em;
   border-radius: 0.5em;
   margin-right: 20px;
+}
+
+//商品追加ボタンの色
+.fa-plus-square {
+  color: black;
+}
+
+//フラッシュメッセージ
+#notice {
+  background-color: #ff7f50;
+  color: white;
+  
+.carousel{
+   width:50%;
+   margin:auto;
 }

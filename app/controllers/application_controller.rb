@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   end
 
   #ログアウト後遷移先
-  def after_sign_out_path_for(resource)
+  def after_sign_out_path_for(resource_or_scope)
+    return new_admin_session_path if resource_or_scope == :admin
     root_path
   end
 
@@ -15,9 +16,13 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
       when Admin
+<<<<<<< HEAD
         admin_products_path          #pathは設定したい遷移先へのpathを指定してください
+=======
+        admin_products_path
+>>>>>>> origin/develop
       when Customer
-        root_path              
+        root_path
     end
   end
 

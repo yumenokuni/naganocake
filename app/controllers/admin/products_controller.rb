@@ -11,8 +11,11 @@ class Admin::ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.save
+    if @product.save
     redirect_to admin_product_path(@product)
+    else
+      render :new
+    end
   end
 
   def index
@@ -31,7 +34,7 @@ class Admin::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      flash[:notice] = "商品の内容を変更しました。"
+      flash[:notice] = '商品の内容を変更しました。'
       redirect_to admin_product_path(@product)
     else
       render :edit
