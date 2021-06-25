@@ -1,10 +1,9 @@
-class Public::Customers::OrdersController < ApplicationController
-
+class Public::OrdersController < ApplicationController
   before_action :authenticate_customer!
 
   def new
     @customer = current_customer
-    if current_customer.cart_products.count == 0
+    if current_customer.cart_items.count == 0
       flash[:notice] = "カートは空です"
       redirect_back(fallback_location: root_path)
     end
@@ -47,7 +46,7 @@ class Public::Customers::OrdersController < ApplicationController
     end
 
     @total_price = 0
-    @cart_products = @customer.cart_products
+    @cart_items = @customer.cart_items
   end
 
   def create
@@ -56,9 +55,9 @@ class Public::Customers::OrdersController < ApplicationController
     @order.shipping_cost = $ship
     if @order.save
       # カート内商品の種類の数だけ@ordered_productを作ってカラムに値入れて全部save、その後カート内全削除
-      @cart_products = current_customer.cart_products
-      @cart_products.each do |cart_p|
-        @ordered_product = OrderedProduct.new(
+      @cart_items = current_customer.cart_items
+      @cart_items.each do |cart_p|
+        @ordered_product = OrderedProducts.new(
           order_id: @order.id,
           product_id: cart_p.product_id,
           count: cart_p.count,
@@ -66,11 +65,11 @@ class Public::Customers::OrdersController < ApplicationController
         )
         @ordered_product.save
       end
-      @cart_products.destroy_all
-      redirect_to orders_finish_path
+      @cart_items.destroy_all
+      redirect_to orders_thanks_path
     else
       flash[:notice] = "注文を確定できませんでした"
-      redirect_to new_orders_path
+      redirect_to new_order_path
     end
 
   end
@@ -88,7 +87,7 @@ class Public::Customers::OrdersController < ApplicationController
   end
 
   def redirect
-    redirect_to new_orders_path
+    redirect_to new_order_path
   end
 
   private

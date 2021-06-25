@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index, :create, :update, :destroy]         #カート内商品
     resources :shippings, only: [:index,:create,:edit,:update,:destroy]       #配送先情報
     resources :products, only: [:index, :show]                                #顧客側商品
+    resources :orders, only: [:new, :create, :show, :index]                     #注文
+    post '/orders/confirm' => 'orders#confirm'
+    get '/orders/thanks' => 'orders#thanks'
 
     #顧客側devise
     devise_for :customers, controllers: {
@@ -41,8 +44,4 @@ Rails.application.routes.draw do
       registrations: 'public/customers/registrations',
     }
   end
-
-  resources :orders, only: [:new, :create, :show, :index]                     #注文
-  post '/orders/confirm' => 'orders#confirm'
-  get '/orders/thanks' => 'orders#thanks'
 end

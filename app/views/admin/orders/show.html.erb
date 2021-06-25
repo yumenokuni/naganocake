@@ -80,7 +80,7 @@
           </thead>
 
           <tbody>
-            <% @ordered_products.each do |prod| %>
+            <% @ordered_items.each do |prod| %>
               <tr>
                 <td><%= prod.product.name %></td>
                 <td><%= (prod.product.price*$tax).floor %></td>
