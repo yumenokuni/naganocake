@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index, :show]                                #顧客側商品
     resources :orders, only: [:new, :create, :show, :index]                     #注文
     post '/orders/confirm' => 'orders#confirm'
+    get '/orders/confirm' => 'customers/orders#redirect'
     get '/orders/thanks' => 'orders#thanks'
 
     #顧客側devise
