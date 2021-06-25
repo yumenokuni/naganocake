@@ -44,6 +44,15 @@ footer {
       -ms-text-size-adjust: 100%;
 }
 
+.box {
+   background-image: url('cafewall01.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   height: 70vh;
+   position: relative;
+   background-position: center;
+}
+
 .welcome {
   color: white;
   border: solid 3px white;
