@@ -12,7 +12,7 @@ class Admin::GenresController < ApplicationController
     genre = Genre.new(genre_params)
     genre.save
     redirect_to admin_genres_path
-    flash[:notice] = "新しいジャンルを作成しました。"
+    flash[:notice] = '新しいジャンルを作成しました。'
   end
 
   def edit
@@ -24,14 +24,14 @@ class Admin::GenresController < ApplicationController
     @genre = Genre.find(params[:id])
     @genre.update(genre_params)
     redirect_to admin_genres_path
-    flash[:notice] = "ジャンルを削除しました。"
+    flash[:notice] = 'ジャンルを削除しました。'
   end
 
   def destroy
     @genre = Genre.find(params[:id])
     @genre.destroy
     redirect_to admin_genres_path
-    flash[:notice] = "ジャンルの修正が完了しました。"
+    flash[:notice] = 'ジャンルの修正が完了しました。'
   end
 
 

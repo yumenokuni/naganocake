@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'public/homes#top'
   get '/about' => 'public/homes#about', as: 'about'
-  get "search" => "searches#search"
+  get 'search' => 'searches#search'                                            #検索窓
 
  # 管理者側deviseルーティング
   devise_for :admin, controllers: {
@@ -44,4 +44,5 @@ Rails.application.routes.draw do
       registrations: 'public/customers/registrations',
     }
   end
+
 end
