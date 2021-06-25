@@ -1,12 +1,17 @@
+<!--管理者側ジャンルページ-->
+
 <div class = "container">
+ 
  <h1>ジャンル編集</h1>
+ 
   <div class = "row">
    
       <%= form_with model: @genre,url:admin_genre_path(@genre),local:true do |f| %>
-      <%= f.label :name, "ジャンル名" %>
-      <%= f.text_field :name %>
-      <%= f.submit '変更を保存',class:"btn btn-sm btn-success" %>
+       <%= f.label :name, "ジャンル名" %>
+       <%= f.text_field :name %>
+       <%= f.submit '変更を保存',class:"btn btn-sm btn-success" %>
       <% end %>
    </div>
+   
 </div>
 

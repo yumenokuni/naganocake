@@ -18,24 +18,28 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;;
  }
 
- header {
-  font-family: 'Caveat', cursive;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
- }
+header {
+  font-family: 'Kosugi Maru', sans-serif;
+}
+
+body {
+  font-family: 'Kosugi Maru', sans-serif;
+}
 
 footer {
   width: 100%;
   position: fixed;
   bottom: 0;
 
-  font-family: 'Caveat', cursive;
+  font-family: 'Caveat', cursive, 'Kosugi Maru', sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -45,7 +49,14 @@ footer {
    background-size: cover;
    background-repeat: no-repeat;
    height: 70vh;
-   
    position: relative;
    background-position: center;
+}
+
+.welcome {
+  color: white;
+  border: solid 3px white;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  margin-right: 20px;
 }
