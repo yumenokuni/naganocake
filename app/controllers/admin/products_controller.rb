@@ -1,4 +1,7 @@
 class Admin::ProductsController < ApplicationController
+  #管理者側商品ページ
+
+  before_action :authenticate_admin!
   before_action :set_genres, only: [:new, :edit, :index, :create, :update]
 
   def new
@@ -28,7 +31,7 @@ class Admin::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      flash[:success] = "商品内容をを変更しました"
+      flash[:notice] = "商品の内容を変更しました。"
       redirect_to admin_product_path(@product)
     else
       render :edit

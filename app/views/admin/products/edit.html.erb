@@ -1,4 +1,7 @@
+<!--管理者側商品編集ページ-->
+
 <h1>商品編集</h1>
+
 <%= form_for(@product, url: admin_product_path(@product.id), method: :patch, class: "form-horizontal") do |f| %>
   <div class="col-xs-6">
     <div class="form-group">
