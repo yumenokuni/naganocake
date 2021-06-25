@@ -1,4 +1,6 @@
 class Admin::OrderedProductsController < ApplicationController
+  #管理者側注文詳細ページ
+
  before_action :authenticate_admin!
 
   def update
@@ -7,12 +9,12 @@ class Admin::OrderedProductsController < ApplicationController
     if @ordered_product.update(prod_params)
       if @ordered_product.production_status == 2
         @order.update(order_status: 2)
-        flash[:notice] = "制作ステータスが「製作中」となったため注文ステータスが「製作中」に更新されました"
+        flash[:notice] = "制作ステータスが「製作中」となったため注文ステータスが「製作中」に更新されました。"
       elsif @order.ordered_products.count == @order.ordered_products.where(production_status: 3).count
         @order.update(order_status: 3)
-        flash[:notice] = "制作ステータスが全て「製作完了」となったため注文ステータスが「発送準備中」に更新されました"
+        flash[:notice] = "制作ステータスが全て「製作完了」となったため注文ステータスが「発送準備中」に更新されました。"
       else
-        flash[:notice] = "制作ステータスを変更しました"
+        flash[:notice] = "制作ステータスを変更しました。"
       end
       redirect_back(fallback_location: root_path)
     end

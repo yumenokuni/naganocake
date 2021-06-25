@@ -1,6 +1,10 @@
+<!--管理者側商品ページ-->
+
+<h1>商品追加</h1>
 <%= form_for(@product, url: admin_products_path(@product.id), method: :patch, class: "form-horizontal") do |f| %>
   <h2 class="text-center">新規商品追加</h2>
   <div class="col-sm-12 col-md-7 col-lg-5 px-5 px-sm-0 mx-auto">
+
     <div class="form-group">
       <%= f.label :"商品画像", class: "col-sm-3 control-label" %>
   　　<%= f.attachment_field :image, class: "col-sm-7" %>

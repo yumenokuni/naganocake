@@ -1,25 +1,32 @@
+<!--管理者側注文詳細ページ-->
+
 <div class="container my-5">
   <div class="row">
     <div class="col-md-2">
       <h4 class="bg-light text-center">注文履歴詳細</h4>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-10 my-3">
       <div class="order-show">
+
         <table>
           <tr>
             <td>購入者</td>
             <td><%= @order.customer.family_name + @order.customer.first_name %></td>
           </tr>
+
           <tr>
             <td>注文日</td>
             <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
           </tr>
+
           <tr>
             <td>配送先</td>
             <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.receiver_name %></td>
           </tr>
+
           <tr>
             <td>支払方法</td>
             <td>
@@ -31,6 +38,7 @@
                 <% end %>
             </td>
           </tr>
+
           <tr>
             <td>注文ステータス</td>
             <td>
@@ -50,13 +58,17 @@
             </td>
           </tr>
         </table>
+
       </div>
     </div>
   </div>
+
   <div class="row mt-3">
     <div class="col-md-9 mb-4">
       <div class="products">
+
         <table class="table table-borderless" style="table-layout:fixed;">
+
           <thead>
             <tr>
               <th>商品名</th>
@@ -66,6 +78,7 @@
               <th>制作ステータス</th>
             </tr>
           </thead>
+
           <tbody>
             <% @ordered_items.each do |prod| %>
               <tr>
@@ -73,6 +86,7 @@
                 <td><%= (prod.product.price*$tax).floor %></td>
                 <td><%= prod.count %></td>
                 <td><%= (prod.product.price*$tax).floor*prod.count %></td>
+
                 <td>
                   <% if prod.production_status == 0 %>
                     制作不可（注文ステータスが「入金確認」になると自動更新されます）
@@ -93,29 +107,39 @@
                     <% end %>
                   <% end %>
                 </td>
+
               </tr>
             <% end %>
           </tbody>
+
         </table>
+
       </div>
     </div>
+
     <div class="col-md-3 d-flex justify-content-center align-items-end mb-5">
       <div class="payment-info-show">
+
         <table>
           <tr>
             <td><strong>商品合計</strong></td>
             <td><%= @order.total_payment - $ship %></td>
           </tr>
+
           <tr>
             <td><strong>配送料</strong></td>
             <td><%= $ship %></td>
           </tr>
+
           <tr>
             <td><strong>請求金額合計</strong></td>
             <td><strong><%= @order.total_payment %></strong></td>
           </tr>
         </table>
+
       </div>
     </div>
+
   </div>
+
 </div>

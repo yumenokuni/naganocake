@@ -1,4 +1,6 @@
 class Admin::OrdersController < ApplicationController
+  #管理者側注文ページ
+
   before_action :authenticate_admin!
 
   def index
@@ -18,13 +20,13 @@ class Admin::OrdersController < ApplicationController
         @ordered_items.each do |prod|
           prod.update(production_status: 1)
         end
-        flash[:notice] = "注文ステータスが「入金確認」となったため、制作ステージが「制作待ち」に自動更新されました"
+        flash[:notice] = "注文ステータスが「入金確認」となったため、制作ステージが「制作待ち」に自動更新されました。"
       else
-        flash[:notice] = "注文ステータスを変更しました"
+        flash[:notice] = "注文ステータスを変更しました。"
       end
       redirect_back(fallback_location: root_path)
     else
-      flash[:notice] = "注文ステータスを変更できませんでした"
+      flash[:notice] = "注文ステータスを変更できませんでした。"
       render :show
     end
 

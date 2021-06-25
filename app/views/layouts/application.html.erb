@@ -17,9 +17,13 @@
       <%= render 'layouts/header' %>
     </header>
 
-    <main>
-      <%= yield %>
-    </main>
+    <% if flash[:notice] %>
+    <p id="notice">
+        <%= flash[:notice] %>
+    </p>
+    <% end %>
+
+    <%= yield %>
 
     <!--フッター-->
     <footer>  <!--位置はapplication.csccで修正できます-->
