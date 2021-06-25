@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
       when Admin
-        admin_orders_path          #pathは設定したい遷移先へのpathを指定してください
+        admin_products_path          #pathは設定したい遷移先へのpathを指定してください
       when Customer
         root_path              
     end
@@ -30,4 +30,9 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up,keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number])
   end
 
+
+  def set_tax_and_ship
+    $tax = 1.08
+    $ship = 800
+  end
 end

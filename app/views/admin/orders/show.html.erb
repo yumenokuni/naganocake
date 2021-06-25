@@ -10,7 +10,7 @@
         <table>
           <tr>
             <td>購入者</td>
-            <td><%= @order.customer.family_name + @order.customer.first_name %></td>
+            <td><%= @order.customer.last_name + @order.customer.first_name %></td>
           </tr>
           <tr>
             <td>注文日</td>
@@ -67,7 +67,7 @@
             </tr>
           </thead>
           <tbody>
-            <% @ordered_items.each do |prod| %>
+            <% @ordered_products.each do |prod| %>
               <tr>
                 <td><%= prod.product.name %></td>
                 <td><%= (prod.product.price*$tax).floor %></td>

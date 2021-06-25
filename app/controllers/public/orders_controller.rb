@@ -57,7 +57,7 @@ class Public::OrdersController < ApplicationController
       # カート内商品の種類の数だけ@ordered_productを作ってカラムに値入れて全部save、その後カート内全削除
       @cart_items = current_customer.cart_items
       @cart_items.each do |cart_p|
-        @ordered_product = OrderedProducts.new(
+        @ordered_product = OrderedProduct.new(
           order_id: @order.id,
           product_id: cart_p.product_id,
           count: cart_p.count,

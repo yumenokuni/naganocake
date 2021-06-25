@@ -15,8 +15,8 @@
             <th>小計</th>
           </tr>
           <% @cart_items.each do |c_product| %>
-          
-            <% sum = taxincluded*c_product.count %>
+           <% tax_included_price = (c_product.product.price*$tax).floor %>
+            <% sum = tax_included_price*c_product.count %>
             <% @total_price += sum %>
             <tr>
               <td><%= attachment_image_tag(c_product.product, :image, fallback: "no_image.jpg", size: "50x50" ) %><%= c_product.product.name %></td>
