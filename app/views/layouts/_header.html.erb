@@ -14,27 +14,27 @@
 
         <!--管理者ログイン時-->
         <% if admin_signed_in? %>
-          <li><%= link_to image_tag("Products.png"), admin_products_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("Customers.png"), admin_customers_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("Orders.png"), admin_orders_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("Genres.png"), admin_genres_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("LogOut.png"), destroy_admin_session_path, method: :delete, class:'nav-link text-light', 'data-confirm' => '本当にログアウトしますか？' %></li>
+          <li><%= link_to image_tag('Products.png'), admin_products_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('Customers.png'), admin_customers_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('Orders.png'), admin_orders_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('Genres.png'), admin_genres_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('LogOut.png'), destroy_admin_session_path, method: :delete, class:'nav-link text-light', 'data-confirm' => '本当にログアウトしますか？' %></li>
 
         <!--顧客ログイン時-->
         <% elsif customer_signed_in? %>
           <li class='welcome'>ようこそ、<%= current_customer.last_name %>さん！</li>
 
-          <li><%= link_to image_tag("MyPage.png"), my_page_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("Products.png"), products_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("CartItems.png"), cart_items_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("LogOut.png"), destroy_customer_session_path, method: :delete, class:'nav-link text-light', 'data-confirm' => '本当にログアウトしますか？' %></li>
+          <li><%= link_to image_tag('MyPage.png'), my_page_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('Products.png'), products_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('CartItems.png'), cart_items_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('LogOut.png'), destroy_customer_session_path, method: :delete, class:'nav-link text-light', 'data-confirm' => '本当にログアウトしますか？' %></li>
 
         <!--顧客未ログイン時-->
         <% else %>
-          <li><%= link_to image_tag("About.png"), about_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("Products.png"), products_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("SignUp.png"), new_customer_registration_path, class:'nav-link text-light' %></li>
-          <li><%= link_to image_tag("LogIn.png"), new_customer_session_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('About.png'), about_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('Products.png'), products_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('SignUp.png'), new_customer_registration_path, class:'nav-link text-light' %></li>
+          <li><%= link_to image_tag('LogIn.png'), new_customer_session_path, class:'nav-link text-light' %></li>
 
         <% end %>
 
@@ -44,6 +44,8 @@
   </div>
 
   <!--検索窓-->
-  <%= render "layouts/search" %>
+  <% if admin_signed_in? %>
+    <%= render 'layouts/search' %>
+  <% end %>
 
 </nav>

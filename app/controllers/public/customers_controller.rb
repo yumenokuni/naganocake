@@ -22,14 +22,14 @@ class Public::CustomersController < ApplicationController
     @customer.update(is_active: false)
     reset_session
     redirect_to root_path
-    flash[:notice]="またのご利用お待ちしております。"
+    flash[:notice]='またのご利用お待ちしております。'
   end
 
   def update
     @customer = current_customer
     if @customer.update(customer_params)
       redirect_to my_page_path
-      flash[:notice]="ユーザー情報を修正しました。"
+      flash[:notice]='ユーザー情報を修正しました。'
     else
       render :edit
     end

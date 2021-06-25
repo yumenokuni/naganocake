@@ -1,18 +1,28 @@
 <!--管理者側商品ページ-->
 
-<div class="container my-5">
-  <div class="row mb-3">
-    <div class="col-md-3 offset-md-1">
-      <h4 class="bg-light text-center">商品一覧</h4>
+<div class='container my-5'>
+
+  <div class='row'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center'>商品一覧</h4>
+
     </div>
-    <div class="col-md-3 offset-md-1">
-      <%= link_to new_admin_product_path(@product), class: "btn-link" do %>
-        <h4>商品追加</h4>
-      <% end %>
-    </div>
-    <div class="col-md-10 offset-md-1">
-      <table class="table border-bottom">
-        <thead class="thead-dark">
+  </div>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <!--商品追加ボタン-->
+      <div class='text-right'>
+        <%= link_to new_admin_product_path(@product), class: 'btn-link' do %>
+          <i class='fas fa-plus-square fa-3x'></i>
+        <% end %>
+      </div>
+
+      <table class='table border-bottom'>
+
+        <thead class='thead-dark'>
           <tr>
             <th class='text-center'>商品ID</th>
             <th class='text-center'>商品名</th>
@@ -21,30 +31,37 @@
             <th class='text-center'>ステータス</th>
           </tr>
         </thead>
+
         <% @products.each do |product| %>
           <tbody>
             <tr>
-              <td><%= product.id %></td>
-              <td>
-                <%= link_to admin_product_path(product), class: "btn-link" do %>
+              <td class='text-center'><%= product.id %></td>
+
+              <td class='text-center'>
+                <%= link_to admin_product_path(product), class: 'btn-link' do %>
                   <%= product.name %>
                 <% end %>
               </td>
-              <td><%= (product.price.to_i*1.1).round %>（<%= product.price%>）円</td>
-              <td><%= product.genre.name %></td>
-              <td>
+
+              <td class='text-center'><%= (product.price.to_i*1.1).round %>（<%= product.price%>）円</td>
+
+              <td class='text-center'><%= product.genre.name %></td>
+
+              <td class='text-center'>
                 <% if product.is_active == true %>
-                  <i class="fas fa-bullseye red"></i>販売中
+                  <i class='fas fa-bullseye red'></i>販売中
                 <% else product.is_active == false %>
-                  <i class="fas fa-bullseye blue"></i>売り切れ
+                  <i class='fas fa-bullseye blue'></i>売り切れ
                 <% end %>
               </td>
+
             </tr>
           </tbody>
         <% end %>
+
       </table>
+
     </div>
   </div>
+
 </div>
-
-

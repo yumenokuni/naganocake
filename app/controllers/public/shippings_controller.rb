@@ -1,7 +1,7 @@
 class Public::ShippingsController < ApplicationController
  #顧客側注文ページ
 
-  before_action :authenticate_customer!
+  before_action :authenticate_customer!w
 
  def index
     @shipping = Shipping.new

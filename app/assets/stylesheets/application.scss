@@ -21,14 +21,17 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;;
+  box-sizing: border-box;
  }
 
- header {
-  font-family: 'Caveat', cursive;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
- }
+header {
+  font-family: 'Kosugi Maru', sans-serif;
+}
+
+body {
+  font-family: 'Kosugi Maru', sans-serif;
+  background-color: #faf0e6;
+}
 
 footer {
   width: 100%;
@@ -50,6 +53,25 @@ footer {
    background-position: center;
 }
 
+//ようこそ〇〇さん
+.welcome {
+  color: white;
+  border: solid 3px white;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  margin-right: 20px;
+}
+
+//商品追加ボタンの色
+.fa-plus-square {
+  color: black;
+}
+
+//フラッシュメッセージ
+#notice {
+  background-color: #ff7f50;
+  color: white;
+  
 .carousel{
    width:50%;
    margin:auto;
