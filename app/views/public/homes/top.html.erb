@@ -1,11 +1,11 @@
 <!--TOPページ-->
 
-<div class='container'>
+<div class='container box'>
   <div class='row'>
     <div class='col align-self-center'>
 
-      <p class='text-center'>
-        ようこそ、<strong>ながのCAKE</strong>へ！<br>
+　　　<h2 class='text-center text-white'>ようこそ、ながのCAKEへ！</h2>
+      <p class='text-center text-white'
         このサイトは、ケーキ販売のECサイトになります。<br>
         会員でない⽅も商品の閲覧はできますが、<br>
         購⼊には会員登録が必要になります。<br>
@@ -24,35 +24,30 @@
 <!--新着商品-->
 <div class='container my-5'>
 
-  <div class='row mb-3'>
-      <h3>新着商品</h3>
+  <div class='mb-3'>
+      <h3 class='text-center'>新着商品</h3>
   </div>
 
-  <div class='row'>
-    <% @products.each do |product| %>
-    <table class='table-hover col-3'>
-
-      <!--画像-->
-      <tr>
-        <td class='text-center'>
-          <%= link_to product_path(product) do %>
-            <%= attachment_image_tag(product, :image, size: '300x220', fallback: 'no_image.jpg') %>
-          <% end %>
-        </td>
-      </tr>
-
-      <!--商品名-->
-      <tr>
-        <td class='text-center'><%= product.name %></td>
-      </tr>
-
-      <!--値段-->
-      <tr>
-        <td class='text-center'>¥<%= product.price %></td>
-      </tr>
-
-    </table>
-    <% end %>
+  <div class="container">
+    <div class="row">
+      <% @products.each do |product| %>
+        <div class="col-md-3">
+          <div class="card shadow">
+            <%= link_to product_path(product), class: "no-underline", 'data-turbolinks': false do %>
+              <%= attachment_image_tag(product, :image, width: '100%', height: '100%', fallback: 'no_image.jpg') %>
+              <div class="card-body">
+                <h6 class="card-title">
+                  <%= product.name %>
+                </h6>
+                <p class="card-text">
+                  ¥<%= product.price %>
+                </p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div style='text-align: right;'>

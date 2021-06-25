@@ -1,4 +1,6 @@
 class Public::ProductsController < ApplicationController
+  #顧客側商品ページ
+
   def index
     @products = Product.all
   end
