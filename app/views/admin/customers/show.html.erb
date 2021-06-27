@@ -90,8 +90,9 @@
     </div>
 
     <div class='pt-5 col-3'>
-      <%= link_to '注文履歴一覧を見る', admin_customer_path(@customer.id), class: 'btn btn-primary' %>　<!--リンク後で変更します-->
+      <%= link_to '注文履歴一覧を見る', admin_orders_path(customer_id: @customer.id), class: 'btn btn-primary' %>　<!--リンク後で変更します-->
     </div>
+
   </div>
 
 </div>

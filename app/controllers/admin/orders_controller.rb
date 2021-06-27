@@ -4,7 +4,13 @@ class Admin::OrdersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-       @orders = Order.all.page(params[:page]).per(10)  #per()は記事数
+    @customer = Customer.find_by(id: params[:customer_id])
+    if @customer.nil? #カスタマーが空白(存在しない)かったら
+      @orders = Order.all.page(params[:page]).per(10)
+    else
+      @orders = @customer.orders.page(params[:page]).per(10)
+    end
+
   end
 
   def show
