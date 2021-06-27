@@ -16,12 +16,12 @@
           <tr>
             <td>配送先</td>
             <td>
-              <%= @order.postal_code %><br><%= @order.address %><br><%= @order.receiver_name %>
+              <%= @order.postal_code %><br><%= @order.address %><br><%= @order.name %>
             </td>
           <tr>
             <td>支払方法</td>
             <td>
-              <% case @order.how_to_pay %>
+              <% case @order.payment %>
               <% when 0 %>
                 クレジットカード
               <% when 1 %>
@@ -55,15 +55,15 @@
           <p><strong>請求情報</strong></p>
           <tr>
             <td>商品合計</td>
-            <td><%= @order.total_payment - $ship %></td>
+            <td><%= @order.amount - @ship.to_i %></td>
           </tr>
           <tr>
             <td>配送料</td>
-            <td><%= $ship %></td>
+            <td><%= @ship.to_i %></td>
           </tr>
           <tr>
             <td>ご請求額</td>
-            <td><%= @order.total_payment %></td>
+            <td><%= @order.amount %></td>
           </tr>
         </table>
       </div>
@@ -86,9 +86,9 @@
         　   <% @ordered_products.each do |prod| %>
         　     <tr>
         　       <td><%= prod.product.name %></td>
-        　       <td><%= (prod.product.price*$tax).floor %></td>
-        　       <td><%= prod.count %></td>
-        　     　<td><%= (prod.product.price*$tax).floor*prod.count %></td>
+        　       <td><%= (prod.product.price.to_i*@tax.to_i).floor %></td>
+        　       <td><%= prod.amount %></td>
+        　     　<td><%= (prod.product.price.to_i*@tax.to_i).floor*prod.amount %></td>
         　     </tr>
         　   <% end %>
         　</tbody>
