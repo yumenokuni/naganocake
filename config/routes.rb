@@ -27,15 +27,17 @@ Rails.application.routes.draw do
   scope module: 'public' do
     get '/customers/my_page' => 'customers#show', as: 'my_page'               #ユーザーマイページ
     get '/customers/unsubscribe' => 'customers#unsubscribe'                   #ユーザー退会
+    get '/orders/thanks' => 'orders#thanks'
     patch '/customers/withdraw' => 'customers#withdraw'                       #ユーザーステータス更新
     delete '/cart_items/destroy_all' => 'cart_items#destroy_all'              #カート内商品全削除
-    post '/orders/confirm' => 'orders#confirm'
-    get '/orders/thanks' => 'orders#thanks'
     resource :customers, only: [:edit, :update]                               #ユーザー情報
     resources :cart_items, only: [:index, :create, :update, :destroy]         #カート内商品
     resources :shippings, only: [:index,:create,:edit,:update,:destroy]       #配送先情報
     resources :products, only: [:index, :show]                                #顧客側商品
     resources :orders, only: [:new, :create, :show, :index]                     #注文
+    post '/orders/confirm' => 'orders#confirm'
+    get '/orders/confirm' => 'customers/orders#redirect'
+    
 
 
     #顧客側devise
