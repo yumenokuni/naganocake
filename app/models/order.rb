@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+    
     belongs_to :customer                             #会員
     has_many :ordered_products, dependent: :destroy  #注文商品
     validates :postal_code, presence: true           #郵便番号
