@@ -4,7 +4,9 @@
 
   <div class='row mb-3'>
     <div class='col-md-3 offset-md-1'>
-      <h4 class='bg-light text-center'>商品一覧</h4>
+
+      <h4 class='bg-dark text-white text-center p-3'>商品一覧</h4>
+
     </div>
   </div>
 
@@ -30,21 +32,21 @@
                   <%= attachment_image_tag(product, :image, size: '300x220', fallback: 'no_image.jpg') %>
               </td>
 
-              <td>
+              <td class='text-center'>
                 <%= link_to product_path(product), class: 'btn-link' do %>
                   <%= product.name %>
                 <% end %>
               </td>
 
-              <td><%= (product.price.to_i*1.1).round %>（<%= product.price%>）円</td>
+              <td class='text-center'><%= (product.price.to_i*1.1).round %>（<%= product.price%>）円</td>
 
-              <td><%= product.genre.name %></td>
+              <td class='text-center'><%= product.genre.name %></td>
 
-              <td>
+              <td class='text-center'>
                 <% if product.is_active == true %>
-                  <i class='fas fa-bullseye red'></i>販売中
+                  <i class='fas fa-bullseye red'></i> 販売中
                 <% else product.is_active == false %>
-                  <i class='fas fa-bullseye blue'></i>売り切れ
+                  <i class='fas fa-bullseye blue'></i> 売り切れ
                 <% end %>
               </td>
 

@@ -33,9 +33,9 @@ Rails.application.routes.draw do
     get '/orders/thanks' => 'orders#thanks'
     resource :customers, only: [:edit, :update]                               #ユーザー情報
     resources :cart_items, only: [:index, :create, :update, :destroy]         #カート内商品
-    resources :shippings, only: [:index,:create,:edit,:update,:destroy]       #配送先情報
+    resources :shippings, only: [:index, :create, :edit, :update, :destroy]   #配送先情報
     resources :products, only: [:index, :show]                                #顧客側商品
-    resources :orders, only: [:new, :create, :show, :index]                     #注文
+    resources :orders, only: [:new, :create, :show, :index]                   #注文
 
 
     #顧客側devise
