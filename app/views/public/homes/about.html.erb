@@ -15,10 +15,32 @@
       </p>
 
       <!--サンプルで画像入れました-->
-      <div class='text-center'>
-        <%= image_tag 'cake2.jpg', width: '50%', height: '50%' %>
+      <div id="carouselExampleIndicators" class="carousel slide text-center" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag 'cafe3.jpg', width: '570px', height: '370px' %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag 'cafe2.jpg', width: '570px', height: '370px' %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag 'cafe1.jpg', width: '570px', height: '370px' %>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-
     </div>
   </div>
 </div>

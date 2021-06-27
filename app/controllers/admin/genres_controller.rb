@@ -9,10 +9,14 @@ class Admin::GenresController < ApplicationController
   end
 
   def create
-    genre = Genre.new(genre_params)
-    genre.save
-    redirect_to admin_genres_path
-    flash[:notice] = '新しいジャンルを作成しました。'
+      @genre = Genre.new(genre_params)
+    if @genre.save
+      flash[:notice] = '新しいジャンルを作成しました。'
+      redirect_to admin_genres_path
+    else
+      @genres = Genre.all
+      render :index
+    end
   end
 
   def edit

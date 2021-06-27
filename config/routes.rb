@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   get '/about' => 'public/homes#about', as: 'about'
   get 'search' => 'searches#search'                                            #検索窓
 
- # 管理者側deviseルーティング
+ #管理者側deviseルーティング
   devise_for :admin, controllers: {
     sessions:      'admin/sessions',
     passwords:     'admin/passwords',
     registrations: 'admin/registrations'
   }
 
-  # 管理者側ルーティング ヤマタツ追記
+  #管理者側ルーティング
   namespace :admin do
     resources :products                                                       #商品情報
     resources :customers, only: [:index, :show, :edit, :update]               #ユーザー情報
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     get 'search' => 'products#search'
   end
 
-  # 顧客側ルーティング
+  #顧客側ルーティング
   scope module: 'public' do
     get '/customers/my_page' => 'customers#show', as: 'my_page'               #ユーザーマイページ
     get '/customers/unsubscribe' => 'customers#unsubscribe'                   #ユーザー退会
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :shippings, only: [:index,:create,:edit,:update,:destroy]       #配送先情報
     resources :products, only: [:index, :show]                                #顧客側商品
     resources :orders, only: [:new, :create, :show, :index]                     #注文
-   
+
 
     #顧客側devise
     devise_for :customers, controllers: {

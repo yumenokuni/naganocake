@@ -6,7 +6,11 @@
     <div class='col-md-3 offset-md-1'>
 
       <h4 class='bg-dark text-white text-center'>ジャンル一覧・追加</h4>
-
+        <% if @genre.errors.any? %>
+          <% @genre.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
+        <% end %>
     </div>
   </div>
 
@@ -57,3 +61,4 @@
   </div>
 
 </div>
+
