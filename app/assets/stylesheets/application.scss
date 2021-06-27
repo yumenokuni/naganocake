@@ -73,7 +73,13 @@ footer {
   color: white;
 }
 
+// TOP・ABOUTページ
 .carousel {
    width: 50%;
    margin: auto;
+}
+
+// ヘッダー要素揃え
+.gnav {
+  flex-direction: column;
 }
