@@ -92,17 +92,17 @@
                     制作不可（注文ステータスが「入金確認」になると自動更新されます）
                   <% elsif @order.order_status == 1 %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
-                  <% elsif @order.production_status == 2 %>
+                  <% elsif @order.order_status == 2 %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :making_status, [["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.select :making_status, [["製作中","2"],["制作完了","3"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
                   <% else %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"],["制作完了","3"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
                   <% end %>

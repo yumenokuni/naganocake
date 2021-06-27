@@ -86,9 +86,9 @@
         　   <% @ordered_products.each do |prod| %>
         　     <tr>
         　       <td><%= prod.product.name %></td>
-        　       <td><%= (prod.amount.to_i*@tax.to_i).floor %></td>
+        　       <td><%= prod.taxed_price.to_i %></td>
         　       <td><%= prod.amount %></td>
-        　     　<td><%= (prod.amount.to_i*@tax.to_i).floor*prod.amount %></td>
+        　     　<td><%= (prod.taxed_price.to_i).floor*prod.amount %></td>
         　     </tr>
         　   <% end %>
         　</tbody>

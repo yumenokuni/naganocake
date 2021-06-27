@@ -56,6 +56,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.shipping_fee = @ship
+    @tax = 1.08
     if @order.save
       # カート内商品の種類の数だけ@ordered_productを作ってカラムに値入れて全部save、その後カート内全削除
       @cart_items = current_customer.cart_items
@@ -64,7 +65,7 @@ class Public::OrdersController < ApplicationController
           order_id: @order.id,
           product_id: cart_p.product_id,
           amount: cart_p.amount,
-          taxed_price: cart_p.product.price*@tax.to_i
+          taxed_price: cart_p.product.price.to_i*@tax
         )
         @ordered_product.save
       end
@@ -74,8 +75,7 @@ class Public::OrdersController < ApplicationController
       flash[:notice] = '注文を確定できませんでした'
       redirect_to new_order_path
     end
-   @tax = 1.08
-   @ship = 800
+
   end
 
   
@@ -87,6 +87,8 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @ordered_products = @order.ordered_products
+    @tax = 1.08
+    @ship = 800
   end
 
   def thanks
