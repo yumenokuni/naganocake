@@ -84,25 +84,25 @@
               <tr>
                 <td><%= prod.product.name %></td>
                 <td><%= (prod.amount*@tax.to_i).floor %></td>
-                <td><%= prod.amount %></td>
+                <td><%= @order.shipping_fee %></td>
                 <td><%= (prod.amount*@tax.to_i).floor*prod.amount %></td>
 
                 <td>
-                  <% if prod.order_status == 0 %>
+                  <% if @order.order_status == 0 %>
                     制作不可（注文ステータスが「入金確認」になると自動更新されます）
-                  <% elsif prod.order_status == 1 %>
+                  <% elsif @order.order_status == 1 %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :production_status, [["制作待ち","1"],["製作中","2"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"]], included_blank: "#{prod.production_status}" %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
-                  <% elsif prod.production_status == 3 %>
+                  <% elsif @order.production_status == 2 %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :production_status, [["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.select :making_status, [["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
                   <% else %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :production_status, [["制作待ち","1"],["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
+                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"],["制作完了","3"]], included_blank: "#{prod.production_status}" %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
                   <% end %>
@@ -123,7 +123,7 @@
         <table>
           <tr>
             <td><strong>商品合計</strong></td>
-            <td><%= @order.total_payment - @ship.to_i %></td>
+            <td><%= @order.payment.to_i - @ship.to_i %></td>
           </tr>
 
           <tr>
@@ -133,7 +133,7 @@
 
           <tr>
             <td><strong>請求金額合計</strong></td>
-            <td><strong><%= @order.total_payment %></strong></td>
+            <td><strong><%= @order.payment %></strong></td>
           </tr>
         </table>
 

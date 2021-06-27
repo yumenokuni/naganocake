@@ -74,7 +74,8 @@ class Public::OrdersController < ApplicationController
       flash[:notice] = '注文を確定できませんでした'
       redirect_to new_order_path
     end
-
+   @tax = 1.08
+   @ship = 800
   end
 
   

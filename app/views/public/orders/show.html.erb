@@ -55,7 +55,7 @@
           <p><strong>請求情報</strong></p>
           <tr>
             <td>商品合計</td>
-            <td><%= @order.amount - @ship.to_i %></td>
+            <td><%= @order.payment.to_i - @ship.to_i %></td>
           </tr>
           <tr>
             <td>配送料</td>
@@ -63,7 +63,7 @@
           </tr>
           <tr>
             <td>ご請求額</td>
-            <td><%= @order.amount %></td>
+            <td><%= @order.payment %></td>
           </tr>
         </table>
       </div>
@@ -86,9 +86,9 @@
         　   <% @ordered_products.each do |prod| %>
         　     <tr>
         　       <td><%= prod.product.name %></td>
-        　       <td><%= (prod.product.price.to_i*@tax.to_i).floor %></td>
+        　       <td><%= (prod.amount.to_i*@tax.to_i).floor %></td>
         　       <td><%= prod.amount %></td>
-        　     　<td><%= (prod.product.price.to_i*@tax.to_i).floor*prod.amount %></td>
+        　     　<td><%= (prod.amount.to_i*@tax.to_i).floor*prod.amount %></td>
         　     </tr>
         　   <% end %>
         　</tbody>
