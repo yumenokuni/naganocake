@@ -20,13 +20,13 @@
           <% @orders.each do |order| %>
             <tr>
               <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
-              <td>〒<%= order.postal_code %><br><%= order.address %><br><%= order.receiver_name %></td>
+              <td>〒<%= order.postal_code %><br><%= order.address %><br><%= order.name %></td>
               <td>
                 <% order.ordered_products.each do |prod| %>
                   <%= prod.product.name %><br />
                 <% end %>
               </td>
-              <td><%= order.total_payment %>円</td>
+              <td><%= order.payment %>円</td>
               <td>
                 <% case order.order_status %>
                 <% when 0 %>

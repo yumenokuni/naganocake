@@ -24,13 +24,13 @@
 
           <tr>
             <td>配送先</td>
-            <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.receiver_name %></td>
+            <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td>
           </tr>
 
           <tr>
             <td>支払方法</td>
             <td>
-              <% case @order.how_to_pay %>
+              <% case @order.payment %>
                 <% when 0 %>
                   クレジットカード
                 <% when 1 %>
@@ -83,14 +83,14 @@
             <% @ordered_products.each do |prod| %>
               <tr>
                 <td><%= prod.product.name %></td>
-                <td><%= (prod.product.price*$tax).floor %></td>
-                <td><%= prod.count %></td>
-                <td><%= (prod.product.price*$tax).floor*prod.count %></td>
+                <td><%= (prod.amount*@tax.to_i).floor %></td>
+                <td><%= prod.amount %></td>
+                <td><%= (prod.amount*@tax.to_i).floor*prod.amount %></td>
 
                 <td>
-                  <% if prod.production_status == 0 %>
+                  <% if prod.order_status == 0 %>
                     制作不可（注文ステータスが「入金確認」になると自動更新されます）
-                  <% elsif prod.production_status == 1 %>
+                  <% elsif prod.order_status == 1 %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
                       <%= f.select :production_status, [["制作待ち","1"],["製作中","2"]], included_blank: "#{prod.production_status}" %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
@@ -123,12 +123,12 @@
         <table>
           <tr>
             <td><strong>商品合計</strong></td>
-            <td><%= @order.total_payment - $ship %></td>
+            <td><%= @order.total_payment - @ship.to_i %></td>
           </tr>
 
           <tr>
             <td><strong>配送料</strong></td>
-            <td><%= $ship %></td>
+            <td><%= @ship.to_i %></td>
           </tr>
 
           <tr>

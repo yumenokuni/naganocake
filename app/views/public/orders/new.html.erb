@@ -9,8 +9,8 @@
       <div class="how-to-pay">
         <h5>支払い方法</h5>
         <div class="col ml-4">
-          <label><%= f.radio_button :how_to_pay, 0 ,checked: true %>クレジットカード</label><br/>
-          <label><%= f.radio_button :how_to_pay, 1 %>銀行振込</label>
+          <label><%= f.radio_button :payment, 0 ,checked: true %>クレジットカード</label><br/>
+          <label><%= f.radio_button :payment, 1 %>銀行振込</label>
         </div>
       </div>
       <div class="where-to-deliver">
@@ -25,11 +25,11 @@
             </div>
             <%= f.hidden_field :postal_code0, value: @customer.postal_code %>
             <%= f.hidden_field :address0, value: @customer.address %>
-            <%= f.hidden_field :receiver_name0, value: @customer.last_name + @customer.first_name %>
+            <%= f.hidden_field :name0, value: @customer.last_name + @customer.first_name %>
         </label><br />
         <label class="col ml-4">
           <%= f.radio_button :select, 1 %>登録済住所から選択<br>
-          <span class="col ml-4"><%= f.collection_select :postal_code1, @customer.shippings, :postal_code, :receiver_info, class: "form-control col-md-8" %></span>
+          <span class="col ml-4"><%= f.collection_select :postal_code1, @customer.shippings, :postal_code, :shipping_info, class: "form-control col-md-8" %></span>
         </label><br />
         <label class="col ml-4">
           <%= f.radio_button :select, 2 %>新しいお届け先<br />
@@ -42,7 +42,7 @@
             <div class="md-8">
               <%= f.text_field :postal_code2 %><br>
               <%= f.text_field :address2, size: 60 %><br>
-              <%= f.text_field :receiver_name2 %>
+              <%= f.text_field :name2 %>
             </div>
           </div>
         </label>

@@ -16,11 +16,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
       when Admin
-<<<<<<< HEAD
-        admin_products_path          #pathは設定したい遷移先へのpathを指定してください
-=======
         admin_products_path
->>>>>>> origin/develop
       when Customer
         root_path
     end
@@ -32,8 +28,4 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def set_tax_and_ship
-    $tax = 1.08
-    $ship = 800
-  end
 end
