@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]               #ユーザー情報
     resources :genres, only: [:index, :create, :edit, :update, :destroy]      #ジャンル
     resources :orders, only: [:index, :show, :update]                         #注文
-    resources :order_products, only: [:update]                                #制作ステータスを更新
+    resources :ordered_products, only: [:update]                                #制作ステータスを更新
   end
 
   #顧客側ルーティング
