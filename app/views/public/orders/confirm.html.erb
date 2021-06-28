@@ -1,60 +1,90 @@
+<!--商品確定ページ-->
+
 <div class="container my-5">
-  <div class="row mb-3">
-      <div class="col-md-3">
-      <h4 class="bg-dark text-white text-center">注文情報確認</h4>
-      </div>
-    </div>
-  <div class="row">
-    <div class="col-md-8">
-      <div class="order-confirm">
-        <table class="table-bordered">
-          <tr>
-            <th>商品名</th>
-            <th>単価（税込）</th>
-            <th>数量</th>
-            <th>小計</th>
-          </tr>
-          <% @cart_items.each do |c_product| %>
-           <% taxed_price = (c_product.product.price.to_i*@tax.to_i).floor %>
-            <% sum = taxed_price*c_product.amount %>
-            <% @amount += sum %>
-            <tr>
-              <td><%= attachment_image_tag(c_product.product, :image, fallback: "no_image.jpg", size: "50x50" ) %><%= c_product.product.name %></td>
-              <td><%= taxed_price %></td>
-              <td><%= c_product.amount %></td>
-              <td><%= sum %></td>
-            </tr>
-          <% end %>
-          <% amount = @amount + @ship.to_i %>
-        </table>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="price-confirm">
-        <table class="table-bordered">
-          <tr>
-            <th>送料</th>
-            <td><%= @ship.to_i %></td>
-          </tr>
-          <tr>
-            <th>商品合計</th>
-            <td><%= @amount %></td>
-          </tr>
-          <tr>
-            <th>請求金額</th>
-            <td><%= amount %></td>
-          </tr>
-        </table>
-      </div>
+
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class="bg-dark text-white text-center p-3">注文情報確認</h4>
+
     </div>
   </div>
 
-  <div class="row-md-12 ml-3 mt-5">
-    <div class="col my-3 d-flex">
-      <p class="font-weight-bold mr-3">支払方法</p><%= @payment %>
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <table class='table table-bordered'>
+        <thead class='thead-dark'>
+          <tr>
+            <th class='text-center'>商品名</th>
+            <th class='text-center'>単価（税込）</th>
+            <th class='text-center'>数量</th>
+            <th class='text-center'>小計</th>
+          </tr>
+        </thead>
+
+
+        <% @cart_items.each do |c_product| %>
+        <% taxed_price = (c_product.product.price.to_i*@tax.to_i).floor %>
+        <% sum = taxed_price*c_product.amount %>
+        <% @amount += sum %>
+        <tbody>
+          <tr>
+            <td class='text-center'><%= attachment_image_tag(c_product.product, :image, fallback: "no_image.jpg", size: "50x50" ) %><%= c_product.product.name %></td>
+            <td class='text-center'><%= taxed_price %>円</td>
+            <td class='text-center'><%= c_product.amount %></td>
+            <td class='text-center'><%= sum %>円</td>
+          </tr>
+        </tbody>
+        <% end %>
+        <% amount = @amount + @ship.to_i %>
+      </table>
+
     </div>
-    <div class="col my-3 d-flex">
-      <p class="font-weight-bold mr-3">お届け先</p><%= @p_code %> <%= @address %><br><%= @name %>
+  </div>
+
+  <div class='row'>
+    <div class = 'col-4 offset-4'>
+
+      <table class='table table-bordered'>
+        <tbody>
+          <tr>
+            <th class='bg-dark text-white text-center'>送料</th>
+            <th class='text-center'><%= @ship.to_i %>円</th>
+          </tr>
+
+          <tr>
+            <th class='bg-dark text-white text-center'>商品合計</th>
+            <th class='text-center'><%= @amount %>円</th>
+          </tr>
+
+          <tr>
+            <th class='bg-dark text-white text-center'>請求金額</th>
+            <th class='text-center'><%= amount %>円</th>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-5 offset-md-7'>
+
+      <table class='table table-borderless'>
+        <tbody>
+          <tr>
+            <th class='text-center'>支払方法</th>
+            <td class='text-center'><%= @payment %></td>
+          </tr>
+
+          <tr>
+            <th class='text-center'>お届け先</th>
+            <td class='text-center'><%= @p_code %> <%= @address %> <%= @name %></td>
+          </tr>
+        </tbody>
+      </table>
+
     </div>
   </div>
 
@@ -69,4 +99,5 @@
       <%= f.submit "注文を確定する", class: "btn btn-success" %>
     <% end %>
   </div>
+  
 </div>
