@@ -6,5 +6,12 @@ class Order < ApplicationRecord
     validates :address, presence: true               #住所
     validates :name, presence: true         #受取人
     
+    enum order_status: {
+    waiting: 0,
+    paid_up: 1,
+    preparing: 2,
+    shipped: 3
+}
+    
     
 end

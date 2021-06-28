@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
+  
     #注文情報確認ページ
   def confirm
     @customer = current_customer
@@ -86,6 +87,7 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @orders = current_customer.orders
     @ordered_products = @order.ordered_products
     @tax = 1.08
     @ship = 800

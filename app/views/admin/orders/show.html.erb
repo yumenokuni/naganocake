@@ -16,45 +16,27 @@
             <td>購入者</td>
             <td><%= @order.customer.last_name + @order.customer.first_name %></td>
           </tr>
-
           <tr>
             <td>注文日</td>
             <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
           </tr>
-
           <tr>
             <td>配送先</td>
             <td>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td>
           </tr>
-
           <tr>
             <td>支払方法</td>
             <td>
-              <% case @order.payment %>
-                <% when 0 %>
-                  クレジットカード
-                <% when 1 %>
-                  銀行振込
-                <% end %>
+              <%= @order.payment %>
             </td>
           </tr>
-
           <tr>
             <td>注文ステータス</td>
             <td>
-              <% if @order.order_status < 2 %>
-                <%= form_with model: @order, url: admin_order_path do |f| %>
-                  <%= f.select :order_status, [["入金待ち","0"],["入金確認","1"]], included_blank: "#{@order.order_status}" %>
-                  <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+                <%= form_with(model: @order, url: admin_order_path, local: true, class: "form-row") do |f| %>
+                <%= f.select :order_status, Order.order_statuses_i18n.invert, {prompt: false}, class:"form-control form-control-sm col-6"  %>
+                <%= f.submit "更新" %>
                 <% end %>
-              <% elsif @order.order_status > 2 %>
-                <%= form_with model: @order, url: admin_order_path do |f| %>
-                  <%= f.select :order_status, [["発送準備中","3"],["発送済み","4"]], included_blank: "#{@order.order_status}" %>
-                  <%= f.submit '更新', class:"btn btn-success btn-sm" %>
-                <% end %>
-              <% else %>
-                製作中（制作ステータスが全て「制作完了」になると自動更新されます）
-              <% end %>
             </td>
           </tr>
         </table>
@@ -83,8 +65,8 @@
             <% @ordered_products.each do |prod| %>
               <tr>
                 <td><%= prod.product.name %></td>
-                <td><%=  prod.taxed_price.to_i %></td>
-                <td><%= @ship %></td>
+                <td><%= prod.taxed_price.to_i %></td>
+                <td><%= prod.amount %></td>
                 <td><%=  (prod.taxed_price.to_i).floor*prod.amount %></td>
 
                 <td>
@@ -95,7 +77,7 @@
                       <%= f.select :making_status, [["制作待ち","1"],["製作中","2"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
-                  <% elsif @order.order_status == 2 %>
+                  <% elsif @order.order_status == 3 %>
                     <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
                       <%= f.select :making_status, [["製作中","2"],["制作完了","3"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
@@ -123,7 +105,7 @@
         <table>
           <tr>
             <td><strong>商品合計</strong></td>
-            <td><%= @order.payment.to_i - @ship.to_i %></td>
+            <td><%= @order.amount %></td>
           </tr>
 
           <tr>
@@ -133,7 +115,7 @@
 
           <tr>
             <td><strong>請求金額合計</strong></td>
-            <td><strong><%= @order.payment %></strong></td>
+            <td><strong><%= @order.amount.to_i + @ship.to_i %></strong></td>
           </tr>
         </table>
 

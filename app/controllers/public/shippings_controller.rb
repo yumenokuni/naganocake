@@ -13,10 +13,18 @@ class Public::ShippingsController < ApplicationController
     shipping.customer_id = current_customer.id
     shipping.save
     redirect_to shippings_path
+    flash[:notice]='配送先情報を追加しました。'
  end
 
  def edit
     @shipping = Shipping.find(params[:id])
+ end
+
+ def update
+    @shipping = Shipping.find(params[:id])
+    @shipping.update(shipping_params)
+    redirect_to shippings_path
+    flash[:notice]='配送先情報を修正しました。'
  end
 
  def destroy
@@ -24,12 +32,7 @@ class Public::ShippingsController < ApplicationController
     @shipping.customer = current_customer
     @shipping.destroy
     redirect_to shippings_path
- end
-
- def update
-    @shipping = Shipping.find(params[:id])
-    @shipping.update(shipping_params)
-    redirect_to shippings_path
+    flash[:notice]='配送先を削除しました。'
  end
 
   private
