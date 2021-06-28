@@ -70,21 +70,27 @@
                 <td><%=  (prod.taxed_price.to_i).floor*prod.amount %></td>
 
                 <td>
-                  <% if @order.order_status == 0 %>
+                  
+                  <% if @order.order_status == "入金待ち" %>
                     制作不可（注文ステータスが「入金確認」になると自動更新されます）
-                  <% elsif @order.order_status == 1 %>
-                    <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"]]  %>
+                  <% elsif @order.order_status == "入金確認" %>
+                    <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                      <%= f.select :making_status, [["製作待ち"],["製作中"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
-                  <% elsif @order.order_status == 3 %>
-                    <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :making_status, [["製作中","2"],["制作完了","3"]]  %>
+                   <% elsif @order.order_status == "製作中" %>
+                    <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                      <%= f.select :making_status, ["製作中"] %>
+                      <%= f.submit '更新', class:"btn btn-success btn-sm" %>
+                    <% end %>
+                  <% elsif @order.order_status == "発送準備中" %>
+                    <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                      <%= f.select :making_status, [["製作中"],["製作完了"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
                   <% else %>
-                    <%= form_with model: prod, url: admin_order_product_path(prod.id) do |f| %>
-                      <%= f.select :making_status, [["制作待ち","1"],["製作中","2"],["制作完了","3"]]  %>
+                    <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                      <%= f.select :making_status, [["製作待ち"],["製作中"],["製作完了"]]  %>
                       <%= f.submit '更新', class:"btn btn-success btn-sm" %>
                     <% end %>
                   <% end %>

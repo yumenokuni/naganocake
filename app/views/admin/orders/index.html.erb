@@ -26,10 +26,7 @@
                  <%= order.ordered_products.sum(:amount) %>
                </td>
                 <td>
-                  
                   <%= order.order_status %>
-                 
-                  
                 </td>
                 <td><%= link_to '詳細', admin_order_path(order.id) %></td>
               </tr>
