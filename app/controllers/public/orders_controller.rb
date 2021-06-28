@@ -8,6 +8,7 @@ class Public::OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
+  
     #注文情報確認ページ
   def confirm
     @customer = current_customer
