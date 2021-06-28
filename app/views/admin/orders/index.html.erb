@@ -1,46 +1,48 @@
+<!--管理者側注文履歴一覧-->
+
 <div class='container my-5'>
+
   <div class='row mb-3'>
     <div class='col-md-3 offset-md-1'>
-      <h4 class='bg-light text-center'>注文履歴一覧</h4>
+
+      <h4 class='bg-dark text-white text-center p-3'>注文履歴一覧</h4>
+
     </div>
   </div>
+
   <div class='row'>
     <div class='col-md-10 offset-md-1'>
-      <div class='order-list'>
-        <table class='table table-hover border-bottom'>
-          <thead>
-            <tr>
-              <th>購入日時</th>
-              <th>購入者</th>
-              <th>注文個数</th>
-              <th>注文ステータス</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @orders.each do |order| %>
-              <tr>
-                <td><%= order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
-                <td><%= order.customer.last_name + order.customer.first_name %></td>
-               <td>
-                 <%= order.ordered_products.sum(:amount) %>
-               </td>
-                <td>
-                  <%= order.order_status %>
-                </td>
-                <td><%= link_to '詳細', admin_order_path(order.id) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-
-        <!--ページネーション-->
-        <div class='pagination'>
-          <%= paginate @orders %>
-        </div>
 
 
+    <table class='table table-hover'>
+      <thead class='thead-dark'>
+        <tr>
+          <th class='text-center'>購入日時</th>
+          <th class='text-center'>購入者</th>
+          <th class='text-center'>注文個数</th>
+          <th class='text-center'>注文ステータス</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td class='text-center'><%= order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          <td class='text-center'><%= order.customer.last_name + order.customer.first_name %></td>
+          <td class='text-center'><%= order.ordered_products.sum(:amount) %></td>
+          <td class='text-center'><%= order.order_status %></td>
+          <td class='text-center'><%= link_to '詳細', admin_order_path(order.id) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+
+      <!--ページネーション-->
+      <div class='pagination'>
+        <%= paginate @orders %>
       </div>
+
     </div>
   </div>
+
 </div>

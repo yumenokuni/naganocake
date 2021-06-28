@@ -1,11 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  #新規登録後遷移先
-  def after_sign_up_path_for(resource)
-    my_page_path(resource)
-  end
-
   #ログアウト後遷移先
   def after_sign_out_path_for(resource_or_scope)
     return new_admin_session_path if resource_or_scope == :admin
@@ -21,6 +16,8 @@ class ApplicationController < ActionController::Base
         root_path
     end
   end
+
+  #サインアップ後の遷移先はregistrations_controllerに記載
 
   private
   def configure_permitted_parameters
