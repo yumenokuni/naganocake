@@ -71,7 +71,6 @@
         <% @ordered_products.each do |prod| %>
         <tbody>
           <tr>
-            <td class='text-center'><%= prod.product.name %></td>
             <td class='text-center'><%= prod.taxed_price.to_i %>円</td>
             <td class='text-center'><%= prod.amount %></td>
             <td class='text-center'><%=  (prod.taxed_price.to_i).floor*prod.amount %></td>
