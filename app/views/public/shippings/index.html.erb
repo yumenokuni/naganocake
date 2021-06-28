@@ -1,5 +1,12 @@
-<div class = 'offset-md-1 col-md-4'>
-      <h1>配送先登録/一覧</h1>
+<!--配送先-->
+
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>配送先登録/一覧</h4>
+
     </div>
   </div>
 
@@ -25,7 +32,7 @@
           <%= f.label :name,'宛名' %>
         </div>
           <%= f.text_field :name,class: 'col-md-4' %>
-          <%= f.submit '新規登録',class: 'col-md-2 btn-lg btn-success'  %>
+          <%= f.submit '新規登録',class: 'col-md-2 btn-lg btn-success ml-3'  %>
         </div>
       </div>
         <% end %>
@@ -33,27 +40,38 @@
     </div>
 
 
-    <div class='row'style='padding-top:30px;'>
-      <div class = 'offset-md-1 col-md-7'>
-        <table class='table table-bordered'>
+    <div class='row'>
+      <div class='col-md-10 offset-md-1'>
+        <table class='table table-hover border-bottom'>
+
+          <thead class='thead-dark'>
             <tr>
                 <th>郵便番号</th>
-                <td>住所</td>
-                <td>宛名</td>
-                <td></td>
+                <th>住所</th>
+                <th>宛名</th>
+                <th></th>
+                <th></th>
             </tr>
+          </thead>
+
             <% @shippings.each do |shipping| %>
+            <tbody>
               <tr>
-                <th><%= shipping.postal_code %></th>
+                <td><%= shipping.postal_code %></td>
                 <td><%= shipping.address%></td>
                 <td><%= shipping.name%></td>
-                <td>
-                    <%= link_to '編集する', edit_shipping_path(shipping.id),class:'btn btn-sm btn-success edit_book_36722' %>
-                    <%= link_to '削除する', shipping_path(shipping.id),class:'btn btn-sm btn-danger destroy_book_36722',method: :delete,'data-confirm' => '本当に削除しますか？'  %>
+                <td class='text-center'>
+                  <%= link_to '編集する', edit_shipping_path(shipping.id), class:'btn btn-success' %>
+                </td>
+                <td class='text-center'>
+                  <%= link_to '削除する', shipping_path(shipping.id), class:'btn btn-danger', method: :delete,'data-confirm' => '本当に削除しますか？'  %>
                 </td>
               </tr>
+            </tbody>
             <% end %>
+
         </table>
       </div>
      </div>
+
   </div>

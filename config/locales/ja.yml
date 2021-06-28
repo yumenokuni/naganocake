@@ -205,12 +205,17 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
-
-ja:
   enums:
-    order:
-      order_status:
-        waiting: "支払待ち"
-        paid_up: "支払済み"
-        preparing: "発送準備中"
-        shipped: "発送済み"
+  order:
+    order_status:
+      waiting: "支払待ち"
+      paid_up: "支払済み"
+      preparing: "発送準備中"
+      shipped: "発送済み"
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."
