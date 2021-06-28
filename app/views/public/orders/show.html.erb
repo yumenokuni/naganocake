@@ -9,43 +9,25 @@
       <div class="order-info">
         <table class="table-bordered">
           <p><strong>注文情報</strong></p>
-          <tr>
-            <td>注文日</td>
-            <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
-          </tr>
-          <tr>
-            <td>配送先</td>
-            <td>
-              <%= @order.postal_code %><br><%= @order.address %><br><%= @order.name %>
-            </td>
-          <tr>
-            <td>支払方法</td>
-            <td>
-              <% case @order.payment %>
-              <% when 0 %>
-                クレジットカード
-              <% when 1 %>
-                銀行振込
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td>ステータス</td>
-            <td>
-              <% case @order.order_status %>
-                <% when 0 %>
-                  入金待ち
-                <% when 1 %>
-                  入金確認
-                <% when 2 %>
-                  製作中
-                <% when 3 %>
-                  発送準備中
-                <% when 4 %>
-                  発送済み
-                <% end %>
-            </td>
-          </tr>
+         <% @orders.each do |order| %>
+            <tr>
+              <td>注文日</td>
+              <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
+            </tr>
+            <tr>
+               <td>配送先</td>
+              <td>〒<%= order.postal_code %><br><%= order.address %><br><%= order.name %></td>
+            </tr>
+            <tr>
+               <td>支払い方法</td>
+               <td><%= order.payment %></td>
+            </tr>
+            <tr>
+               <td>ステータス</td>
+               <td><%= order.order_status %></td>
+           
+          <% end %>
+        
         </table>
       </div>
     </div>
@@ -53,17 +35,17 @@
       <div class="payment-info">
         <table class="table-bordered">
           <p><strong>請求情報</strong></p>
-          <tr>
-            <td>商品合計</td>
-            <td><%= @order.payment.to_i - @ship.to_i %></td>
+           <tr>
+            <td><strong>商品合計</strong></td>
+            <td><%= @order.amount %></td>
           </tr>
           <tr>
-            <td>配送料</td>
+            <td><strong>配送料</strong></td>
             <td><%= @ship.to_i %></td>
           </tr>
           <tr>
-            <td>ご請求額</td>
-            <td><%= @order.payment %></td>
+            <td><strong>ご請求額</strong></td>
+            <td><strong><%= @order.amount + @ship.to_i %></strong></td>
           </tr>
         </table>
       </div>
