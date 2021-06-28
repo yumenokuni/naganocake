@@ -65,6 +65,7 @@
       <%= f.hidden_field :address, value: @address %>
       <%= f.hidden_field :name, value: @name %>
       <%= f.hidden_field :amount, value: amount %>
+      <%= f.hidden_field :new_address, value: @is_new_address %>
       <%= f.submit "注文を確定する", class: "btn btn-success" %>
     <% end %>
   </div>
