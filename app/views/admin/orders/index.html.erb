@@ -20,25 +20,16 @@
           <tbody>
             <% @orders.each do |order| %>
               <tr>
-
                 <td><%= order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
                 <td><%= order.customer.last_name + order.customer.first_name %></td>
                <td>
                  <%= order.ordered_products.sum(:amount) %>
                </td>
                 <td>
-                  <% case order.order_status %>
-                  <% when 0 %>
-                    入金待ち
-                  <% when 1 %>
-                    入金確認
-                  <% when 2 %>
-                    製作中
-                  <% when 3 %>
-                    発送準備中
-                  <% when 4 %>
-                    発送済み
-                  <% end %>
+                  
+                  <%= order.order_status %>
+                 
+                  
                 </td>
                 <td><%= link_to '詳細', admin_order_path(order.id) %></td>
               </tr>
