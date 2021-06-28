@@ -15,6 +15,7 @@ class Admin::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    
     @ordered_products = @order.ordered_products
     @tax = 1.08
     @ship = 800

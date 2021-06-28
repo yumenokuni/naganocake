@@ -11,25 +11,22 @@
       <div class="order-info">
         <table class="table-bordered">
           <p><strong>注文情報</strong></p>
-         <% @orders.each do |order| %>
             <tr>
               <td>注文日</td>
-              <td><%= order.created_at.strftime("%Y/%m/%d") %></td>
+              <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
             </tr>
             <tr>
                <td>配送先</td>
-              <td>〒<%= order.postal_code %><br><%= order.address %><br><%= order.name %></td>
+              <td>〒<%= @order.postal_code %><br><%= @order.address %><br><%= @order.name %></td>
             </tr>
             <tr>
                <td>支払い方法</td>
-               <td><%= order.payment %></td>
+               <td><%= @order.payment %></td>
             </tr>
             <tr>
                <td>ステータス</td>
-               <td><%= order.order_status %></td>
-           
-          <% end %>
-        
+               <td><%= @order.order_status %></td>
+            </tr>
         </table>
       </div>
     </div>
