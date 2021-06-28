@@ -55,14 +55,14 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    if params[:order][:new_address] == 'true'
-      shipping = Shipping.new
-      shipping.customer_id = current_customer.id
-      shipping.name = params[:order][:name]
-      shipping.postal_code = params[:order][:postal_code]
-      shipping.address = params[:order][:address]
-      shipping.save
-    end
+      if params[:order][:new_address] == 'true'
+        shipping = Shipping.new
+        shipping.customer_id = current_customer.id
+        shipping.name = params[:order][:name]
+        shipping.postal_code = params[:order][:postal_code]
+        shipping.address = params[:order][:address]
+        shipping.save
+      end
 
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
