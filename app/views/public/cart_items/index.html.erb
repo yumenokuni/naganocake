@@ -1,0 +1,125 @@
+<!--カート内商品ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>ショッピングカート</h4>
+
+    </div>
+  </div>
+
+<% if @cart_items.present? %>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <!--destroy_allボタン-->
+      <p class='text-right'>
+        <%= link_to 'カートを空にする', cart_items_destroy_all_path, method: :delete, class: 'btn btn-danger', 'data-confirm' => '本当によろしいですか？' %>
+      </p>
+
+      <table class='table table-bordered table-hover'>
+        <thead class='thead-dark'>
+          <tr>
+            <th class='text-center'>商品名</th>
+            <th class='text-center'>単価(税込)</th>
+            <th class='text-center'>数量</th>
+            <th class='text-center'>小計</th>
+            <th class='text-center'></th>
+          </tr>
+        </thead>
+
+        <% @sum = 0 %>
+        <% @cart_items.each do |cart_item| %>
+        <tbody>
+          <tr>
+            <!--商品名-->
+            <td class='text-center'>
+              <%= attachment_image_tag cart_item.product, :image, size: '50x40', fallback: 'no_image.jpg' %>
+              <%= cart_item.product.name %>
+            </td>
+
+            <!--単価(税込)-->
+            <td class='text-center'>
+              <%= (cart_item.product.price.to_i * 1.1).round %>円
+            </td>
+
+            <!--数量-->
+            <td class='text-center'>
+              <%= form_with url: cart_item_path(cart_item.id), model: cart_item, local: true do |f| %>
+                <%= f.select :amount, [*1..100], class: 'form-control' %>
+                <%= f.submit '変更', class: 'btn-sm btn-success' %>
+              <% end %>
+            </td>
+
+            <!--小計-->
+            <td class='text-center'>
+              <%= (cart_item.product.price.to_i * cart_item.amount * 1.1).round %>円
+            </td>
+
+            <!--削除ボタン-->
+            <td class='text-center'>
+              <%= link_to '削除する', cart_item_path(cart_item.id), method: :delete, class: 'btn btn-danger' %>
+            </td>
+
+            <% @sum += (cart_item.product.price.to_i * cart_item.amount * 1.1).round %>
+
+          </tr>
+        </tbody>
+        <% end %>
+      </table>
+
+      <!--買い物を続けるボタン-->
+      <p class='text-left'>
+        <%= link_to '買い物を続ける', root_path, class: 'btn btn-primary' %>
+      </p>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class = 'col-4 offset-4'>
+
+      <!--合計-->
+      <table class='table table-bordered'>
+        <tbody>
+          <tr>
+
+            <th class='bg-dark text-white text-center'>合計</th>
+
+            <th class='text-center'>
+              <%= @sum %>円
+            </th>
+
+          </tr>
+        </tbody>
+      </table>
+
+      <!--情報⼊⼒に進むボタン-->
+      <p class='pt-3 text-center'>
+        <%= link_to '情報⼊⼒に進む', new_order_path, class: 'btn btn-success btn-lg' %>
+      </p>
+
+    </div>
+  </div>
+
+<!--カート内に商品がなければ表示-->
+<% else %>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+      <h5 class='p-5 text-center'>商品はありません</h5>
+
+      <!--買い物を続けるボタン-->
+      <p class='text-center'>
+        <%= link_to '買い物を続ける', root_path, class: 'btn btn-primary' %>
+      </p>
+
+    </div>
+  </div>
+
+<% end %>
+
+</div>

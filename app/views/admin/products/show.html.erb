@@ -1,0 +1,64 @@
+<!--管理者側商品詳細ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-5'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>商品詳細</h4>
+
+    </div>
+  </div>
+
+  <div class='row' style='width: 90%; margin: 20px auto;'>
+
+  	<!--商品画像-->
+		<div class='col-sm-5'>
+      <%= attachment_image_tag(@product, :image, size: '300x220', fallback: 'no_image.jpg') %>
+    </div>
+
+    <div class='col-xs-7'>
+    	<table class='table table-borderless'>
+
+    		<tr>
+					<th style='border-top: none;' class='col-xs-4'>商品名</th>
+					<td style='border-top: none; ' class='product col-xs-8'><%= @product.name %></td>
+				</tr>
+
+				<tr>
+					<th style='border-top: none;' class='col-xs-4'>商品説明</th>
+					<td style='border-top: none;' class='product col-xs-8'><%= @product.introduction %></td>
+				</tr>
+
+				<tr>
+					<th style='border-top: none;'>ジャンル</th>
+					<td style='border-top: none;' class='product'><%= @product.genre.name %></td>
+				</tr>
+
+				<tr>
+					<th style='border-top: none;'>税抜価格（税込価格）</th>
+					<td style='border-top: none;' class='product'><%= (@product.price.to_i*1.1).round %>（<%= @product.price %>）円</td>
+				</tr>
+
+				<tr>
+					<th style='border-top: none;'>販売ステータス</th>
+					<td style='border-top: none;' class='product'>
+            <% if @product.is_active == true %>
+              <i class='fas fa-bullseye red'></i>販売中
+            <% elsif @product.is_active == false %>
+              <i class='fas fa-bullseye blue'></i>販売停止中
+            <% end %>
+          </td>
+				</tr>
+
+				<tr>
+				  <td style='border-top: none;'><%= link_to '編集する', edit_admin_product_path(@product), data: {'turbolinks' => false}, class: 'glyphicon glyphicon-pencil btn btn-success pull-right edit_product_#{@product.id}' %></td>
+          <td style='border-top: none;'><%= link_to '削除する', admin_product_path(@product), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'glyphicon glyphicon-pencil btn btn-danger pull-right destroy_product_#{@product.id}'%></td>
+				</tr>
+
+    	</table>
+    </div>
+
+  </div>
+
+</div>

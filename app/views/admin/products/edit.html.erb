@@ -1,0 +1,79 @@
+<!--管理者側商品編集ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-5'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>商品編集</h4>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <%= form_for(@product, url: admin_product_path(@product.id), method: :patch, class: 'form-horizontal') do |f| %>
+      <table class='table table-borderless'>
+
+        <tr>
+          <div class='form-group'>
+            <th>商品画像</th>
+              <td><%= f.attachment_field :image %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>商品名</th>
+              <td><%= f.text_field :name, class: 'col-sm-6 form-control-static name' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>商品説明</th>
+              <td><%= f.text_area :introduction, class: 'col-sm-6 control-label introduction' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>ジャンル</th>
+              <td><%= f.collection_select(:genre_id, @genres, :id, :name, prompt: '-- 選択してください --', class: 'form-control col-sm-9 genre_id') %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>税抜価格</th>
+              <td><%= f.text_field :price, class: 'col-sm-3 form-control-static price' %> 円</td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>販売ステータス</th>
+            <td>
+              <%= f.radio_button :is_active, :true %>
+              <%= f.label :is_active, '販売中', value: :true %>
+              <%= f.radio_button :is_active, :false %>
+              <%= f.label :is_active, '販売停止', value: :false %>
+            </td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th></th>
+              <td><%= f.submit '変更を保存', class: 'btn btn-success w-50' %></td>
+          </div>
+        </tr>
+
+      </table>
+      <% end %>
+
+    </div>
+  </div>
+
+</div>

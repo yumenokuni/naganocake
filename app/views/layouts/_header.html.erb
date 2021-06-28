@@ -1,0 +1,54 @@
+<nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
+  <div class='container'>
+
+    <!--ロゴはこちらで作成しました(https://fontmeme.com/ja/font-disney-logo/)-->
+    <a href='/'><img src='https://fontmeme.com/permalink/210625/00a36e18e37a2f059eb5916a67639dda.png' alt='font-disney-logo' border='0'></a>
+
+    <!--ハンバーガーアイコン-->
+    <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
+      <span class='navbar-toggler-icon'></span>
+    </button>
+
+    <div class='collapse navbar-collapse gnav' id='navbarNavDropdown'>
+
+      <ul class='navbar-nav ml-auto'>
+      <!--管理者ログイン時-->
+      <% if admin_signed_in? %>
+        <li class='nav-item'><%= link_to image_tag('Products.png'), admin_products_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('Customers.png'), admin_customers_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('Orders.png'), admin_orders_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('Genres.png'), admin_genres_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('LogOut.png'), destroy_admin_session_path, method: :delete, class:'nav-link text-light', 'data-confirm' => '本当にログアウトしますか？' %></li>
+
+      </ul>
+
+        <!--検索窓-->
+        <ul class='navbar-nav ml-auto'>
+          <li><%= render 'layouts/search' %></li>
+        </ul>
+
+
+      <ul class='navbar-nav ml-auto'>
+        <!--顧客ログイン時-->
+      <% elsif customer_signed_in? %>
+        <li class='welcome'>ようこそ、<%= current_customer.last_name %>さん！</li>
+
+        <li class='nav-item'><%= link_to image_tag('MyPage.png'), my_page_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('Products.png'), products_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('CartItems.png'), cart_items_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('LogOut.png'), destroy_customer_session_path, method: :delete, class:'nav-link text-light', 'data-confirm' => '本当にログアウトしますか？' %></li>
+
+      <!--顧客未ログイン時-->
+      <% else %>
+        <li class='nav-item'><%= link_to image_tag('About.png'), about_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('Products.png'), products_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('SignUp.png'), new_customer_registration_path, class:'nav-link text-light' %></li>
+        <li class='nav-item'><%= link_to image_tag('LogIn.png'), new_customer_session_path, class:'nav-link text-light' %></li>
+
+      <% end %>
+      </ul>
+
+    </div>
+
+  </div>
+</nav>

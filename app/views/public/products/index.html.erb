@@ -1,0 +1,64 @@
+<!--会員側商品一覧ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>商品一覧</h4>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+      <table class='table table-hover border-bottom'>
+
+        <thead class='thead-dark'>
+          <tr>
+            <th class='text-center'>商品画像</th>
+            <th class='text-center'>商品名</th>
+            <th class='text-center'>税込価格(税抜価格)</th>
+            <th class='text-center'>ジャンル</th>
+            <th class='text-center'>ステータス</th>
+          </tr>
+        </thead>
+
+        <% @products.each do |product| %>
+          <tbody>
+            <tr>
+
+              <td id='img_field'>
+                  <%= attachment_image_tag(product, :image, size: '300x220', fallback: 'no_image.jpg') %>
+              </td>
+
+              <td class='text-center'>
+                <%= link_to product_path(product), class: 'btn-link' do %>
+                  <%= product.name %>
+                <% end %>
+              </td>
+
+              <td class='text-center'><%= (product.price.to_i*1.1).round %>（<%= product.price%>）円</td>
+
+              <td class='text-center'><%= product.genre.name %></td>
+
+              <td class='text-center'>
+                <% if product.is_active == true %>
+                  <i class='fas fa-bullseye red'></i> 販売中
+                <% else product.is_active == false %>
+                  <i class='fas fa-bullseye blue'></i> 売り切れ
+                <% end %>
+              </td>
+
+            </tr>
+          </tbody>
+        <% end %>
+
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+

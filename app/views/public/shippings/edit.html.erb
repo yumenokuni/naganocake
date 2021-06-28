@@ -1,0 +1,47 @@
+<!--配送先-->
+
+<div class = 'container my-5'>
+
+  <div class='row mb-3'>
+     <div class = 'col-md-3 offset-md-1'>
+
+     <h4 class='bg-dark text-white text-center p-3'>配送先編集</h4>
+
+     </div>
+  </div>
+
+  <%= form_with model: @shipping, url: shipping_path, method: :patch, local: true do |f| %>
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <table class='table table-borderless'>
+        <tbody>
+
+          <tr>
+            <th>郵便番号(ハイフンなし)</th>
+            <td><%= f.text_field :postal_code, class: 'form-control' %></td>
+          </tr>
+
+          <tr>
+            <th>住所</th>
+            <td><%= f.text_field :address, class: 'form-control' %></td>
+          </tr>
+
+          <tr>
+            <th>宛名</th>
+            <td><%= f.text_field :name, class: 'form-control' %></td>
+          </tr>
+
+          <tr>
+            <th></th>
+            <td><%= f.submit '変更内容を保存',class:'btn-lg btn-success' %></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <% end %>
+
+</div>

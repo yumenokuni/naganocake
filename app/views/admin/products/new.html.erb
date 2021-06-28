@@ -1,0 +1,73 @@
+<!--管理者側商品ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>商品新規登録</h4>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <%= form_for(@product, url: admin_products_path(@product.id), method: :post, class: 'form-horizontal') do |f| %>
+      <table class='table table-borderless'>
+
+        <tr>
+          <div class='form-group'>
+            <th>商品画像</th>
+              <td><%= f.attachment_field :image %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>商品名</th>
+              <td><%= f.text_field :name, class: 'col-sm-6 form-control-static name' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>商品説明</th>
+              <td><%= f.text_area :introduction, class: 'col-sm-6 control-label introduction' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>ジャンル</th>
+              <td><%= f.collection_select(:genre_id, @genres, :id, :name, prompt: '-- 選択してください --', class: 'form-control col-sm-9 genre_id') %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>税抜価格</th>
+              <td><%= f.text_field :price, class: 'col-sm-3 form-control-static price' %> 円</td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>販売ステータス</th>
+              <td><%= f.select :is_active, [['販売中', true], ['販売停止', false]], prompt: '-- 選択してください --', class: 'form-control col-sm-9 is_active' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th></th>
+              <td><%= f.submit '新規登録', class: 'btn btn-primary w-50' %></td>
+          </div>
+        </tr>
+
+      </table>
+      <% end %>
+    </div>
+  </div>
+
+</div>

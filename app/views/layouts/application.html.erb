@@ -4,12 +4,31 @@
     <title>Naganocake</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+
+    <!--ヘッダー-->
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
+
+    <% if flash[:notice] %>
+    <p id="notice">
+        <%= flash[:notice] %>
+    </p>
+    <% end %>
+
     <%= yield %>
+
+    <!--フッター-->
+    <footer>  <!--位置はapplication.csccで修正できます-->
+      <%= render 'layouts/footer' %>
+    </footer>
+
   </body>
 </html>

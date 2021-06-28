@@ -1,0 +1,64 @@
+<!--管理者側ジャンルページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-5'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>ジャンル一覧・追加</h4>
+        <% if @genre.errors.any? %>
+          <% @genre.errors.full_messages.each do |message| %>
+            <%= message %>
+          <% end %>
+        <% end %>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <%= form_with model: @genre, url: admin_genres_path, local:true do |f| %>
+        <div class = 'field'>
+          <%= f.label :name,'ジャンル名' %>
+          <%= f.text_field :name, placeholder: 'ジャンル名を入力' %>
+          <%= f.submit '新規登録', class: 'btn btn-success w-25' %>
+        </div>
+    　<% end %>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-5 offset-md-1'>
+
+    　<table class='table border-bottom'>
+
+        <thead class='thead-dark'>
+          <tr>
+            <th class='text-center'>ジャンル</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <% @genres.each do |genre| %>
+        <tbody>
+          <tr>
+            <td class='text-center'><%= genre.name %><td>
+            <td class='text-center'><%= link_to '編集する', edit_admin_genre_path(genre.id), class: 'btn btn-sm btn-success' %><td>
+            <td class='text-center'><%= link_to '削除する', admin_genre_path(genre.id), class: 'btn btn-sm btn-danger', method: :delete,'data-confirm' => '本当に削除しますか？'  %><td>
+          </tr>
+        </tbody>
+        <% end %>
+
+      </table>
+
+    </div>
+  </div>
+
+</div>
+

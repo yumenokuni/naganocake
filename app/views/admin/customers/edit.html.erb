@@ -1,0 +1,93 @@
+<!--管理者側会員ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-5 offset-md-1'>
+
+      <h4>
+        <strong><%= @customer.last_name %><%= @customer.first_name %></strong>
+        さんの会員情報編集
+      </h4>
+
+    </div>
+  </div>
+
+  <%= form_with model: @customer, url: admin_customer_path, method: :patch, local: true do |f| %>
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <table class='table table-borderless'>
+        <tbody>
+
+          <!--会員ID-->
+          <tr>
+            <th>会員ID</th>
+            <td><%= @customer.id %></td>
+          </tr>
+
+          <!--氏名-->
+          <tr>
+            <th>氏名</th>
+            <td><%= f.text_field :last_name, autocomplete: 'last_name', class: 'form-control' %></td>
+            <td><%= f.text_field :first_name, autocomplete: 'first_name', class: 'form-control' %></td>
+          </tr>
+
+          <!--フリガナ-->
+          <tr>
+            <th>フリガナ</th>
+            <td><%= f.text_field :last_name_kana, autocomplete: 'last_name_kana', class: 'form-control' %></td>
+            <td><%= f.text_field :first_name_kana, autocomplete: 'first_name_kana', class: 'form-control' %></td>
+          </tr>
+
+          <!--郵便番号-->
+          <tr>
+            <th>郵便番号</th>
+            <td><%= f.text_field :postal_code, autocomplete: 'postal_code', class: 'form-control' %></td>
+          </tr>
+
+          <!--住所-->
+          <tr>
+            <th>住所</th>
+            <td><%= f.text_field :address, autocomplete: 'address', class: 'form-control' %></td>
+          </tr>
+
+          <!--電話番号-->
+          <tr>
+            <th>電話番号</th>
+            <td><%= f.text_field :telephone_number, autocomplete: 'telephone_number', class: 'form-control' %></td>
+          </tr>
+
+          <!--メールアドレス-->
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= f.text_field :email, autocomplete: 'email', class: 'form-control' %></td>
+          </tr>
+
+          <!--ステータス-->
+          <tr>
+            <th>会員ステータス</th>
+            <td>
+              <%= f.radio_button :is_active, :true, disabled: true %>
+              <%= f.label :is_active, '有効', value: :true %>
+              <%= f.radio_button :is_active, :false, disabled: true %>
+              <%= f.label :is_active, '退会', value: :false %>
+            </td>
+          </tr>
+
+          <!--ボタン-->
+          <tr>
+            <th></th>
+            <td>
+              <%= f.submit '変更を保存', class: 'btn btn-success btn-lg' %>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  <% end %>
+
+</div>

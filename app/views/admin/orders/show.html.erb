@@ -1,0 +1,138 @@
+<!--管理者側注文詳細ページ-->
+
+<div class='container my-5'>
+
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+
+      <h4 class='bg-dark text-white text-center p-3'>注文履歴詳細</h4>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-6 offset-md-1'>
+
+      <table class='table table-borderless'>
+        <tbody>
+          <tr>
+            <th class='text-center'>購入者</th>
+            <td class='text-center'><%= @order.customer.last_name + @order.customer.first_name %></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th class='text-center'>注文日</th>
+            <td class='text-center'><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th class='text-center'>配送先</th>
+            <td class='text-center'>〒<%= @order.postal_code %> <%= @order.address %><br><%= @order.name %></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th class='text-center'>支払方法</th>
+            <td class='text-center'><%= @order.payment %></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <th class='text-center'>注文ステータス</th>
+
+            <%= form_with(model: @order, url: admin_order_path, local: true, class: 'form-row') do |f| %></td>
+              <td class='text-center'><%= f.select :order_status, Order.order_statuses_i18n.invert, {prompt: false}, class:'form-control'  %></td>
+              <td class='text-center'><%= f.submit '更新' %></td>
+            <% end %>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <table class='table table-bordered table-hover'>
+        <thead class='thead-dark'>
+          <tr>
+            <th class='text-center'>商品名</th>
+            <th class='text-center'>単価(税込)</th>
+            <th class='text-center'>数量</th>
+            <th class='text-center'>小計</th>
+            <th class='text-center'>制作ステータス</th>
+          </tr>
+        </thead>
+
+        <% @ordered_products.each do |prod| %>
+        <tbody>
+          <tr>
+            <td class='text-center'><%= prod.taxed_price.to_i %>円</td>
+            <td class='text-center'><%= prod.amount %></td>
+            <td class='text-center'><%=  (prod.taxed_price.to_i).floor*prod.amount %></td>
+
+            <td class='text-center'>
+
+              <% if @order.order_status == '入金待ち' %>
+                制作不可（注文ステータスが「入金確認」になると自動更新されます）
+              <% elsif @order.order_status == '入金確認' %>
+                <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                  <%= f.select :making_status, [['製作待ち'],['製作中']]  %>
+                  <%= f.submit '更新', class:'btn btn-success btn-sm' %>
+                <% end %>
+               <% elsif @order.order_status == '製作中' %>
+                <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                  <%= f.select :making_status, ['製作中'] %>
+                  <%= f.submit '更新', class:'btn btn-success btn-sm' %>
+                <% end %>
+              <% elsif @order.order_status == '発送準備中' %>
+                <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                  <%= f.select :making_status, [['製作中'],['製作完了']]  %>
+                  <%= f.submit '更新', class:'btn btn-success btn-sm' %>
+                <% end %>
+              <% else %>
+                <%= form_with model: prod, url: admin_ordered_product_path(prod.id) do |f| %>
+                  <%= f.select :making_status, [['製作待ち'],['製作中'],['製作完了']]  %>
+                  <%= f.submit '更新', class:'btn btn-success btn-sm' %>
+                  <% end %>
+              <% end %>
+                </td>
+              </tr>
+        </tbody>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+  <div class='row mb-3'>
+    <div class = 'col-md-4 offset-md-4 pt-3'>
+
+      <table class='table table-bordered'>
+        <tbody>
+          <tr>
+            <th class='text-center bg-dark text-white'>商品合計</th>
+            <td class='text-center'><%= @order.amount %>円</td>
+          </tr>
+
+          <tr>
+            <th class='text-center bg-dark text-white'>配送料</th>
+            <td class='text-center'><%= @ship.to_i %>円</td>
+          </tr>
+
+          <tr>
+            <th class='text-center bg-dark text-white'>請求金額合計</th>
+            <td class='text-center'><%= @order.amount.to_i + @ship.to_i %>円</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
