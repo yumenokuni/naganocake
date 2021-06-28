@@ -8,7 +8,7 @@ class Public::OrdersController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
-
+  
     #注文情報確認ページ
   def confirm
     @customer = current_customer
@@ -43,7 +43,6 @@ class Public::OrdersController < ApplicationController
         @p_code = params[:postal_code2]
         @address = params[:address2]
         @name = params[:name2]
-        @is_new_address = true
       end
     end
 
@@ -51,10 +50,11 @@ class Public::OrdersController < ApplicationController
     @cart_items = @customer.cart_items
     @tax = 1.08
     @ship = 800
-
+    
   end
 
   def create
+<<<<<<< HEAD
       if params[:order][:new_address] == 'true'
         shipping = Shipping.new
         shipping.customer_id = current_customer.id
@@ -64,6 +64,8 @@ class Public::OrdersController < ApplicationController
         shipping.save
       end
 
+=======
+>>>>>>> origin/develop
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.shipping_fee = @ship
@@ -89,7 +91,7 @@ class Public::OrdersController < ApplicationController
 
   end
 
-
+  
 
   def index
     @orders = current_customer.orders
@@ -105,8 +107,8 @@ class Public::OrdersController < ApplicationController
 
   def thanks
   end
-
-
+  
+ 
 
   private
 
